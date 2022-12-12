@@ -1,6 +1,6 @@
 extends Area2D
 
-export var speed = 400 # How fast the player will move (pixels/sec).
+export var speed = 200 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 # Declare member variables here. Examples:
 # var a = 2
@@ -45,3 +45,9 @@ func _process(delta):
 		$AnimatedSprite.flip_v = false
 		# See the note below about boolean assignment.
 		$AnimatedSprite.flip_h = velocity.x < 0
+
+func _on_Player_body_entered(body):
+	print("hej")
+	print(body)
+	#position.x = 0
+	#position.y = 0
