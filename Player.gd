@@ -1,6 +1,7 @@
 extends Area2D
 
 export var speed = 200 # How fast the player will move (pixels/sec).
+
 var screen_size # Size of the game window.
 # Declare member variables here. Examples:
 # var a = 2
@@ -18,16 +19,23 @@ func start(pos):
 	show()
 	$CollisionShape2D.disabled = false
 
+
+var isbounce = true
+var isbounce2 = true
+var counter = 0
+var counter2 = 0
+var velocity = Vector2.ZERO 
 func _process(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
-	var forward_face_direction = Vector2(cos(rotation), sin(rotation))
-	velocity.x += 1 * forward_face_direction.x
-	velocity.y += 1 * forward_face_direction.y
+
+	if isbounce:
+		var forward_face_direction = Vector2(cos(rotation), sin(rotation))
+		velocity.x = 1 * forward_face_direction.x
+		velocity.y = 1 * forward_face_direction.y
 	
-	if Input.is_action_pressed("move_right"):
+	if Input.is_action_pressed("move_right") and isbounce:
 		rotation += 0.05
 		
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("move_left") and isbounce:
 		rotation -= 0.05
 		
 	if velocity.length() > 0:
@@ -36,18 +44,23 @@ func _process(delta):
 	else:
 		$AnimatedSprite.stop()
 	
+	
 	position += velocity * delta
-	position.x = clamp(position.x, 0, screen_size.x)
-	position.y = clamp(position.y, 0, screen_size.y)
+	if not isbounce:
+		if counter > 10:
+			isbounce = true
+			counter = 0
+		else:
+			counter += 1
 	
 	if velocity.x != 0:
 		$AnimatedSprite.animation = "walk"
 		$AnimatedSprite.flip_v = false
-		# See the note below about boolean assignment.
 		$AnimatedSprite.flip_h = velocity.x < 0
 
-func _on_Player_body_entered(body):
-	print("hej")
-	print(body)
-	#position.x = 0
-	#position.y = 0
+
+func _on_Player_area_entered(area):
+	velocity.x = velocity.x * (-1)
+	velocity.y = velocity.y * (-1)
+	rotation = (rotation) + (PI)
+	isbounce = false
