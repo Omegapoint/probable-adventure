@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wall.jpeg-580ac8eef3167cfb43c9d0b3d3794e7a.stex"
+path="res://.import/hippo.png-c5bf04a9181531b9de226f29c5e385f7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/wall.jpeg"
-dest_files=[ "res://.import/wall.jpeg-580ac8eef3167cfb43c9d0b3d3794e7a.stex" ]
+source_file="res://art/Animals_Square/hippo.png"
+dest_files=[ "res://.import/hippo.png-c5bf04a9181531b9de226f29c5e385f7.stex" ]
 
 [params]
 
