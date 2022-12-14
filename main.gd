@@ -36,4 +36,4 @@ func _process(delta):
 
 
 func _on_Main_child_entered_tree(node):
-	print("Player " + node.name + " is ready!")
+	print("Player " + str(node.id) + " is ready!")
