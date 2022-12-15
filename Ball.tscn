@@ -11,7 +11,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 106.301
+radius = 40.0
 
 [node name="Ball" type="RigidBody2D"]
 position = Vector2( -48, -10 )
@@ -19,9 +19,9 @@ gravity_scale = 0.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 707, 315 )
-scale = Vector2( 0.785714, 0.794118 )
+scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 705, 312 )
+position = Vector2( 706, 315 )
 shape = SubResource( 2 )
