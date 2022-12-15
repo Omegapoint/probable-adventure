@@ -51,12 +51,6 @@ func _process(delta):
 	velocity.x += 1 * forward_face_direction.x
 	velocity.y += 1 * forward_face_direction.y
 	
-	var collide = move_and_collide(velocity * delta)
-	if collide:
-		velocity.x = velocity.x * (-1)
-		velocity.y = velocity.y * (-1)
-		rotation = (rotation) + (PI)
-		isBounce = true
 	
 	if !isBounce:
 		if Input.is_action_pressed(moveRight):
@@ -67,15 +61,6 @@ func _process(delta):
 		
 		if Input.is_action_pressed(moveUp):
 			$ShootArea.disabled = false
-	
-		# Animation 
-		if velocity.length() > 0:
-			velocity = velocity.normalized() * speed
-			$AnimatedSprite.play()
-		else:
-			$AnimatedSprite.stop()
-		
-		position += velocity * delta
 		
 	else:
 		if bounceCounter > 10:
@@ -83,7 +68,18 @@ func _process(delta):
 			bounceCounter = 0
 		else:
 			bounceCounter += 1
-		
-		# Set new position
-		position += velocity * delta
 
+	
+	# Animation 
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * speed
+		$AnimatedSprite.play()
+	else:
+		$AnimatedSprite.stop()
+	
+	var collide = move_and_collide(velocity * delta)
+	if collide:
+		velocity.x = velocity.x * (-1)
+		velocity.y = velocity.y * (-1)
+		rotation = (rotation) + (PI)
+		isBounce = true
