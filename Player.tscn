@@ -1,14 +1,35 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://art/playerGrey_up1.png" type="Texture" id=1]
+[ext_resource path="res://art/Animals_Round/elephant.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
-[ext_resource path="res://art/playerGrey_up2.png" type="Texture" id=3]
+[ext_resource path="res://art/Animals_Square/elephant.png" type="Texture" id=3]
+[ext_resource path="res://art/Animals_Square/parrot.png" type="Texture" id=4]
+[ext_resource path="res://art/Animals_Round/parrot.png" type="Texture" id=5]
+[ext_resource path="res://art/Animals_Square/rabbit.png" type="Texture" id=6]
+[ext_resource path="res://art/Animals_Square/giraffe.png" type="Texture" id=7]
+[ext_resource path="res://art/Animals_Round/giraffe.png" type="Texture" id=8]
+[ext_resource path="res://art/Animals_Round/rabbit.png" type="Texture" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "walk",
+"name": "elephant",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "giraffe",
+"speed": 5.01
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "parrot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "rabbit",
 "speed": 5.0
 } ]
 
@@ -16,24 +37,27 @@ animations = [ {
 radius = 59.5
 height = 49.0
 
-[node name="Player" type="Area2D"]
-position = Vector2( 468, 267 )
-collision_layer = 7
-collision_mask = 7
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 19.5, 22 )
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 471, 263 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-rotation = 1.5708
+scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 1 )
-animation = "walk"
+animation = "elephant"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1.5 )
 rotation = 1.5708
 shape = SubResource( 2 )
 
-[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
-[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+[node name="ShootArea" type="CollisionShape2D" parent="."]
+position = Vector2( 25, 0 )
+shape = SubResource( 3 )
+disabled = true
