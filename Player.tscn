@@ -37,7 +37,7 @@ animations = [ {
 radius = 22.0
 height = 14.0
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="KinematicBody2D"]
 position = Vector2( 476, 263 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -51,5 +51,3 @@ animation = "elephant"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
-
-[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
