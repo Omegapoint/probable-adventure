@@ -31,9 +31,4 @@ func create_player(id):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-
 	pass
-
-#
-#func _on_Main_child_entered_tree(node):
-#	print("Player " + str(node.id) + " is ready!")
