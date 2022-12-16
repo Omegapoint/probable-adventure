@@ -1,7 +1,7 @@
 extends Node2D
 
 var player = preload("res://Player.tscn")
-var nrOfPlayers = 4
+var nrOfPlayers = 2
 var playerList = []
 
 # Map boundary 
