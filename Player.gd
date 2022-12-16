@@ -60,6 +60,7 @@ func _ready():
 		characterSprite = "bear"
 		currentSprite =  characterSprite
 		characterSpeed = 200
+		rotation += PI
 		
 	elif (id == 6):
 		moveRight = "moveRight_3"
@@ -68,6 +69,7 @@ func _ready():
 		characterSprite = "valross"
 		currentSprite = characterSprite
 		characterSpeed= 200
+		rotation += PI
 		
 	elif (id == 7):
 		moveRight = "moveRight_6"
@@ -76,6 +78,7 @@ func _ready():
 		characterSprite = "goat"
 		currentSprite = characterSprite
 		characterSpeed = 200
+		rotation += PI
 		
 	elif (id == 8):
 		moveRight = "moveRight_9"
@@ -84,6 +87,7 @@ func _ready():
 		characterSprite = "hedgehog"
 		currentSprite = characterSprite
 		characterSpeed = 200
+		rotation += PI
 	
 	screen_size = get_viewport_rect().size
 
@@ -117,7 +121,7 @@ func _process(delta):
 				speedDashTime = 0
 				currentSprite = characterSprite
 		
-		# Needed in order to not get stuck in dash animation
+		# Needed in order to not get stuck in dash sprite if you do a quick dash
 		if(Input.is_action_just_released(moveUp)):
 			speedDashCooldown = true 
 			speedDashTime = 0
