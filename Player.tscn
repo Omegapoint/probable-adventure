@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://art/Team_Blue/crawfish.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -16,10 +16,11 @@
 [ext_resource path="res://art/Team_Pink/crab-2.png" type="Texture" id=14]
 [ext_resource path="res://art/Team_Pink/image.png" type="Texture" id=15]
 [ext_resource path="res://art/Team_Pink/jellyfish.png" type="Texture" id=16]
+[ext_resource path="res://art/Team_Pink/myra.png" type="Texture" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 15 ) ],
+"frames": [ ExtResource( 15 ), ExtResource( 17 ) ],
 "loop": true,
 "name": "ant",
 "speed": 5.0
