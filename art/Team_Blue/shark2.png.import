@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shark.png-c4af5afa538033818063f9ab19950a92.stex"
+path="res://.import/shark2.png-ac78f4d3110fac20430e84dd3cca18cf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Team Blue/shark.png"
-dest_files=[ "res://.import/shark.png-c4af5afa538033818063f9ab19950a92.stex" ]
+source_file="res://art/Team_Blue/shark2.png"
+dest_files=[ "res://.import/shark2.png-ac78f4d3110fac20430e84dd3cca18cf.stex" ]
 
 [params]
 

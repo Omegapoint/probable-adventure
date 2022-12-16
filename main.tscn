@@ -122,7 +122,7 @@ position = Vector2( 1920, 0 )
 shape = SubResource( 7 )
 
 [node name="GoalRight2" type="Sprite" parent="."]
-position = Vector2( 1896, 504 )
+position = Vector2( 1961, 511 )
 scale = Vector2( 0.188649, 0.153676 )
 texture = ExtResource( 4 )
 flip_h = true
