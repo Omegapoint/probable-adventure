@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://art/Team_Blue/crawfish.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -12,9 +12,18 @@
 [ext_resource path="res://art/fire.png" type="Texture" id=10]
 [ext_resource path="res://art/Team_Blue/butterfly.png" type="Texture" id=11]
 [ext_resource path="res://art/Team_Blue/shark2.png" type="Texture" id=12]
+[ext_resource path="res://art/Team_Pink/image-2.png" type="Texture" id=13]
+[ext_resource path="res://art/Team_Pink/crab-2.png" type="Texture" id=14]
+[ext_resource path="res://art/Team_Pink/image.png" type="Texture" id=15]
+[ext_resource path="res://art/Team_Pink/jellyfish.png" type="Texture" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "ant",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "bear",
@@ -25,6 +34,11 @@ animations = [ {
 "name": "butterfly",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "crab",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "crawfish",
@@ -33,6 +47,11 @@ animations = [ {
 "frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "dash",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "dolphin",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
@@ -48,6 +67,11 @@ animations = [ {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "hedgehog",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "jellyfish",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ), ExtResource( 12 ) ],

@@ -57,7 +57,7 @@ func _ready():
 		moveRight = "moveRight_H"
 		moveLeft = "moveLeft_F"
 		moveUp = "moveUp_T"
-		characterSprite = "bear"
+		characterSprite = "crab"
 		currentSprite =  characterSprite
 		characterSpeed = 200
 		rotation += PI
@@ -66,7 +66,7 @@ func _ready():
 		moveRight = "moveRight_3"
 		moveLeft = "moveLeft_1"
 		moveUp = "moveUp_2"
-		characterSprite = "valross"
+		characterSprite = "dolphin"
 		currentSprite = characterSprite
 		characterSpeed= 200
 		rotation += PI
@@ -75,7 +75,7 @@ func _ready():
 		moveRight = "moveRight_6"
 		moveLeft = "moveLeft_4"
 		moveUp = "moveUp_5"
-		characterSprite = "goat"
+		characterSprite = "ant"
 		currentSprite = characterSprite
 		characterSpeed = 200
 		rotation += PI
@@ -84,7 +84,7 @@ func _ready():
 		moveRight = "moveRight_9"
 		moveLeft = "moveLeft_7"
 		moveUp = "moveUp_8"
-		characterSprite = "hedgehog"
+		characterSprite = "jellyfish"
 		currentSprite = characterSprite
 		characterSpeed = 200
 		rotation += PI
