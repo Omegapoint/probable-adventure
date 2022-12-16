@@ -1,44 +1,68 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://art/Animals_Round/elephant.png" type="Texture" id=1]
+[ext_resource path="res://art/Team Blue/crawfish.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
-[ext_resource path="res://art/Animals_Square/elephant.png" type="Texture" id=3]
-[ext_resource path="res://art/Animals_Square/parrot.png" type="Texture" id=4]
-[ext_resource path="res://art/Animals_Round/parrot.png" type="Texture" id=5]
-[ext_resource path="res://art/Animals_Square/rabbit.png" type="Texture" id=6]
-[ext_resource path="res://art/Animals_Square/giraffe.png" type="Texture" id=7]
-[ext_resource path="res://art/Animals_Round/giraffe.png" type="Texture" id=8]
-[ext_resource path="res://art/Animals_Round/rabbit.png" type="Texture" id=9]
+[ext_resource path="res://art/Team Blue/shark.png" type="Texture" id=3]
+[ext_resource path="res://art/Team Blue/fish.png" type="Texture" id=4]
+[ext_resource path="res://art/Team Brown/valross.png" type="Texture" id=5]
+[ext_resource path="res://art/Team Brown/hedgehog.png" type="Texture" id=6]
+[ext_resource path="res://art/Team Brown/goat.png" type="Texture" id=7]
+[ext_resource path="res://art/Team Brown/bear.png" type="Texture" id=8]
+[ext_resource path="res://art/Team Blue/butterfly2.png" type="Texture" id=9]
+[ext_resource path="res://art/fire.png" type="Texture" id=10]
+[ext_resource path="res://art/Team Blue/butterfly.png" type="Texture" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "elephant",
+"name": "bear",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 11 ), ExtResource( 9 ) ],
 "loop": true,
-"name": "giraffe",
-"speed": 5.01
-}, {
-"frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "parrot",
+"name": "butterfly",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 1 ) ],
 "loop": true,
-"name": "rabbit",
+"name": "crawfish",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "dash",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "fish",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "goat",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "hedgehog",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "shark",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "valross",
 "speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 21.5
 height = 0.0
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 19.5, 22 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 471, 263 )
@@ -50,14 +74,9 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 1 )
-animation = "elephant"
+animation = "hedgehog"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1.5 )
 rotation = 1.5708
 shape = SubResource( 2 )
-
-[node name="ShootArea" type="CollisionShape2D" parent="."]
-position = Vector2( 25, 0 )
-shape = SubResource( 3 )
-disabled = true

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://art/gold_ball.png" type="Texture" id=1]
+[ext_resource path="res://Ball.gd" type="Script" id=2]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -11,17 +12,15 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 106.301
+radius = 40.0
 
 [node name="Ball" type="RigidBody2D"]
-position = Vector2( -48, -10 )
 gravity_scale = 0.0
+script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 707, 315 )
-scale = Vector2( 0.785714, 0.794118 )
+scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 705, 312 )
 shape = SubResource( 2 )

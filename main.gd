@@ -1,7 +1,7 @@
 extends Node2D
 
 var player = preload("res://Player.tscn")
-var nrOfPlayers = 4
+var nrOfPlayers = 8
 var playerList = []
 
 # Map boundary 
@@ -22,6 +22,7 @@ func create_player(id):
 	player_instance.id = id
 
 	# Randomize start position of new player
+	# Add list of positions and go through it instead
 	randomize()
 	player_instance.position = Vector2(randi()%mapX,randi()%mapY)
 
