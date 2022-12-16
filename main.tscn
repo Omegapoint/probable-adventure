@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://FOOTBALL_FIELD.jpg" type="Texture" id=2]
 [ext_resource path="res://Ball.tscn" type="PackedScene" id=3]
 [ext_resource path="res://goal_right.png" type="Texture" id=4]
 [ext_resource path="res://DiloWorld-mLJLv.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://sound/yay-6120.mp3" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=5]
 size = 200
@@ -61,6 +62,9 @@ align = 1
 [node name="Ball" parent="." instance=ExtResource( 3 )]
 position = Vector2( 960, 540 )
 physics_material_override = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Ball"]
+stream = ExtResource( 6 )
 
 [node name="GoalRight" type="Sprite" parent="."]
 position = Vector2( -40, 512 )
