@@ -1,14 +1,12 @@
 extends Node2D
 
 var player = preload("res://Player.tscn")
-var nrOfPlayers = 4
+var nrOfPlayers = 8
 var playerList = []
 
 # Map boundary 
 var mapX
 var mapY
-
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

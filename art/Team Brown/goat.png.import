@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/crawfish.png-215ff7a5bd8095b6b5b9a3b253e15a02.stex"
+path="res://.import/goat.png-0187effe7c1cd60af74fae0f5022699b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Team_Blue/crawfish.png"
-dest_files=[ "res://.import/crawfish.png-215ff7a5bd8095b6b5b9a3b253e15a02.stex" ]
+source_file="res://art/Team Brown/goat.png"
+dest_files=[ "res://.import/goat.png-0187effe7c1cd60af74fae0f5022699b.stex" ]
 
 [params]
 

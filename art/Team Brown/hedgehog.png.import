@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/butterfly.png-e6ddbb79d8632cade1506ba72eeea1c0.stex"
+path="res://.import/hedgehog.png-7f2bb42a0c67f5cf95875c488e05ba7d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Team_Blue/butterfly.png"
-dest_files=[ "res://.import/butterfly.png-e6ddbb79d8632cade1506ba72eeea1c0.stex" ]
+source_file="res://art/Team Brown/hedgehog.png"
+dest_files=[ "res://.import/hedgehog.png-7f2bb42a0c67f5cf95875c488e05ba7d.stex" ]
 
 [params]
 
