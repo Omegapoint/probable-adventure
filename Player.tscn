@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://art/Animals_Round/elephant.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -10,9 +10,15 @@
 [ext_resource path="res://art/Animals_Round/giraffe.png" type="Texture" id=8]
 [ext_resource path="res://art/Animals_Round/rabbit.png" type="Texture" id=9]
 [ext_resource path="res://art/fire.png" type="Texture" id=10]
+[ext_resource path="res://art/Team_Blue/butterfly.png" type="Texture" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "butterfly",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "dash",

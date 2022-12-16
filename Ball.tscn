@@ -19,10 +19,8 @@ gravity_scale = 0.0
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 707, 315 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 706, 315 )
 shape = SubResource( 2 )

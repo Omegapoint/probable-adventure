@@ -39,11 +39,18 @@ func _ready():
 		characterSprite = "giraffe"
 		currentSprite = characterSprite
 		characterSpeed= 300
-	else:
+	elif (id == 3):
 		moveRight = "moveRight_M"
 		moveLeft = "moveLeft_N"
 		moveUp = "moveUp_J"
 		characterSprite = "parrot"
+		currentSprite = characterSprite
+		characterSpeed = 300
+	elif (id == 4):
+		moveRight = "moveRight_P"
+		moveLeft = "moveLeft_O"
+		moveUp = "moveUp_0"
+		characterSprite = "butterfly"
 		currentSprite = characterSprite
 		characterSpeed = 300
 	

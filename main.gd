@@ -1,12 +1,14 @@
 extends Node2D
 
 var player = preload("res://Player.tscn")
-var nrOfPlayers = 2
+var nrOfPlayers = 4
 var playerList = []
 
 # Map boundary 
 var mapX
 var mapY
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +24,7 @@ func create_player(id):
 	player_instance.id = id
 
 	# Randomize start position of new player
+	# Add list of positions and go through it instead
 	randomize()
 	player_instance.position = Vector2(randi()%mapX,randi()%mapY)
 

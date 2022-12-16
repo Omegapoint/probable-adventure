@@ -14,7 +14,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _integrate_forces(state):
-	if position.x < 0 and (position.y > 400 or position.y < 750):
+	if position.x < 0 and (position.y > 400 and position.y < 750):
 		print("GOOOOAAAAL")
 		state.transform = Transform2D(0, Vector2(1920/2,1080/2))
 		state.linear_velocity = Vector2()
@@ -22,7 +22,7 @@ func _integrate_forces(state):
 		get_tree().get_root().get_node("Main/score_blue").text = String(counter_blue)
 
 		
-	if position.x > 1920:
+	if position.x > 1920 and (position.y > 400 and position.y < 750):
 		print("GOOOOAAAAL2")
 		state.transform = Transform2D(0, Vector2(1920/2,1080/2))
 		state.linear_velocity = Vector2()
