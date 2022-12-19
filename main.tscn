@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://FOOTBALL_FIELD.jpg" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://goal_right.png" type="Texture" id=4]
 [ext_resource path="res://DiloWorld-mLJLv.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://sound/yay-6120.mp3" type="AudioStream" id=6]
+[ext_resource path="res://goal_pink.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=5]
 size = 200
@@ -26,7 +27,7 @@ extents = Vector2( 73, 193 )
 extents = Vector2( 158.5, 164.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1116, 100 )
+extents = Vector2( 1108, 100 )
 
 [sub_resource type="CircleShape2D" id=7]
 radius = 48.0
@@ -39,7 +40,18 @@ position = Vector2( 960, 540 )
 scale = Vector2( 0.319947, 0.27 )
 texture = ExtResource( 2 )
 
-[node name="score_blue" type="Label" parent="."]
+[node name="GoalPink" type="Sprite" parent="."]
+position = Vector2( 1968, 512 )
+scale = Vector2( 0.188649, 0.153676 )
+texture = ExtResource( 7 )
+flip_h = true
+
+[node name="GoalRight" type="Sprite" parent="."]
+position = Vector2( -40, 512 )
+scale = Vector2( 0.188649, 0.153676 )
+texture = ExtResource( 4 )
+
+[node name="score_brown" type="Label" parent="."]
 margin_left = 704.0
 margin_top = 432.0
 margin_right = 958.0
@@ -49,7 +61,7 @@ custom_fonts/font = SubResource( 5 )
 text = "0"
 align = 1
 
-[node name="score_brown" type="Label" parent="."]
+[node name="score_blue" type="Label" parent="."]
 margin_left = 968.0
 margin_top = 432.0
 margin_right = 1222.0
@@ -66,11 +78,6 @@ physics_material_override = SubResource( 1 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Ball"]
 stream = ExtResource( 6 )
 
-[node name="GoalRight" type="Sprite" parent="."]
-position = Vector2( -40, 512 )
-scale = Vector2( 0.188649, 0.153676 )
-texture = ExtResource( 4 )
-
 [node name="wall" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall"]
@@ -86,7 +93,7 @@ position = Vector2( -222.5, 539.5 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="wall"]
-position = Vector2( 972, -100 )
+position = Vector2( 964, -100 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="wall"]
@@ -124,11 +131,5 @@ shape = SubResource( 7 )
 [node name="CollisionShape2D13" type="CollisionShape2D" parent="wall"]
 position = Vector2( 1920, 0 )
 shape = SubResource( 7 )
-
-[node name="GoalRight2" type="Sprite" parent="."]
-position = Vector2( 1961, 511 )
-scale = Vector2( 0.188649, 0.153676 )
-texture = ExtResource( 4 )
-flip_h = true
 
 [connection signal="child_entered_tree" from="." to="." method="_on_Main_child_entered_tree"]
