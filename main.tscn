@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://FOOTBALL_FIELD.jpg" type="Texture" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://zero-2.png" type="Texture" id=10]
 [ext_resource path="res://three-2.png" type="Texture" id=11]
 [ext_resource path="res://sound/three-two-one-fight-deep-voice-38382.mp3" type="AudioStream" id=12]
+[ext_resource path="res://trophy.png" type="Texture" id=13]
+[ext_resource path="res://paw-3.png" type="Texture" id=14]
+[ext_resource path="res://paw-2-2.png" type="Texture" id=15]
 
 [sub_resource type="DynamicFont" id=5]
 size = 200
@@ -36,6 +39,18 @@ extents = Vector2( 1108, 100 )
 
 [sub_resource type="CircleShape2D" id=7]
 radius = 48.0
+
+[sub_resource type="DynamicFont" id=8]
+size = 100
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 39
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -165,5 +180,51 @@ texture = ExtResource( 11 )
 
 [node name="Countdown" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
+
+[node name="Trophy" type="Sprite" parent="."]
+visible = false
+position = Vector2( 968, 712 )
+scale = Vector2( 1.28906, 1.28906 )
+z_index = 6
+texture = ExtResource( 13 )
+
+[node name="TeamWonNode" type="Node2D" parent="."]
+z_index = 6
+
+[node name="TeamWon" type="Label" parent="TeamWonNode"]
+visible = false
+margin_left = 608.0
+margin_top = 64.0
+margin_right = 1310.0
+margin_bottom = 304.0
+custom_colors/font_color = Color( 0.494118, 0.168627, 0.929412, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Draw"
+align = 1
+valign = 1
+
+[node name="RedButton" type="Label" parent="TeamWonNode"]
+visible = false
+margin_top = 128.0
+margin_right = 1920.0
+margin_bottom = 392.0
+custom_fonts/font = SubResource( 9 )
+text = "Press the red button to continue"
+align = 1
+valign = 1
+
+[node name="PawLeft" type="Sprite" parent="TeamWonNode"]
+visible = false
+position = Vector2( 744, 440 )
+rotation = 1.5708
+scale = Vector2( 0.706694, 0.706694 )
+texture = ExtResource( 14 )
+
+[node name="PawRight" type="Sprite" parent="TeamWonNode"]
+visible = false
+position = Vector2( 1128, 448 )
+rotation = -1.5708
+scale = Vector2( 0.5625, 0.5625 )
+texture = ExtResource( 15 )
 
 [connection signal="child_entered_tree" from="." to="." method="_on_Main_child_entered_tree"]

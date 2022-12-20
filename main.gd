@@ -24,6 +24,7 @@ var playerCoordinateList = [
 # Map boundary 
 var mapX
 var mapY
+var game_over = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -38,7 +39,7 @@ func _ready():
 	$Countdown.play()
 	
 	timer.connect("timeout",self,"do_this")
-	timer.wait_time = 20
+	timer.wait_time = 5
 	timer.one_shot = true
 	add_child(timer)
 	
@@ -74,6 +75,11 @@ func _process(delta):
 		$"Two".visible = false
 		$"One".visible = true
 		
+	if(game_over):
+		if(Input.is_action_pressed("start_game")):
+			get_tree().change_scene("res://Menu.tscn")
+		
+		
 	#elif pre_timer.time_left > 0:
 	#	$"One".visible = false
 	#	$"Zero".visible = true
@@ -81,11 +87,24 @@ func _process(delta):
 	pass
 
 func do_this():
-	#print('wait 3 seconds and do this....')
-	get_tree().change_scene("res://Menu.tscn")
-	print("preview")
-	stopped = false
-	#get_tree().get_root().get_node("Player").stopped = false
+	if(int($score_blue.text) > int($score_brown.text)):
+		$TeamWonNode/TeamWon.add_color_override("font_color", Color(1,0,1))
+		$TeamWonNode/TeamWon.text = "Blue Team Won"
+		$Trophy.visible = true
+	elif(int($score_blue.text) < int($score_brown.text)):
+		$TeamWonNode/TeamWon.add_color_override("font_color", Color(0.4,0.2,0.5))
+		$TeamWonNode/TeamWon.text = "Red Team Won"
+		$Trophy.visible = true
+	else:
+		$TeamWonNode/PawLeft.visible = true
+		$TeamWonNode/PawRight.visible = true
+	$TeamWonNode/RedButton.visible = true
+	$TeamWonNode/TeamWon.visible = true
+	$Ball.linear_velocity = Vector2(0,0)
+	stopped = true
+
+	game_over = true
+	#get_tree().change_scene("res://Menu.tscn")
 
 func preview():
 	print("preview")

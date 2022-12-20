@@ -9,7 +9,6 @@ var counter = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	pass # Replace with function body.
 
 
@@ -38,10 +37,7 @@ func _process(delta):
 			get_tree().change_scene("res://main.tscn")
 		else:
 			get_tree().quit()
-		print(counter)
-		print("33333")
 	pass
-
 
 func _on_Button_pressed():
 	get_tree().change_scene("res://main.tscn")
