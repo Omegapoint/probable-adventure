@@ -16,7 +16,7 @@ func _ready():
 func _integrate_forces(state):
 	if position.x < 0 and (position.y > 400 and position.y < 750):
 		print("GOOOOAAAAL")
-		$AudioStreamPlayer.play()
+		$GoalYay.play()
 		state.transform = Transform2D(0, Vector2(1920/2,1080/2))
 		state.linear_velocity = Vector2()
 		counter_blue = counter_blue + 1
@@ -25,7 +25,7 @@ func _integrate_forces(state):
 		
 	if position.x > 1920 and (position.y > 400 and position.y < 750):
 		print("GOOOOAAAAL2")
-		$AudioStreamPlayer.play()
+		$GoalYay.play()
 		state.transform = Transform2D(0, Vector2(1920/2,1080/2))
 		state.linear_velocity = Vector2()
 		counter_brown = counter_brown + 1

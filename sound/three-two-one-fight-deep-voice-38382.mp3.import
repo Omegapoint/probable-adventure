@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/three-two-one-fight-deep-voice-38382.mp3-81e7300ea2944869ff133a256d14df6d.mp3str"
+
+[deps]
+
+source_file="res://sound/three-two-one-fight-deep-voice-38382.mp3"
+dest_files=[ "res://.import/three-two-one-fight-deep-voice-38382.mp3-81e7300ea2944869ff133a256d14df6d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

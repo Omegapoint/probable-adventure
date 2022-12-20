@@ -113,6 +113,7 @@ func _process(delta):
 	# Handles the dash, sets the speed of a dash and  how long it lasts
 	if !speedDashCooldown:
 		if Input.is_action_pressed(moveUp):
+			$FireUp.play()
 			currentSprite = dashSprite
 			speed = 2000
 			speedDashTime += 1

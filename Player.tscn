@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://art/Team_Blue/crawfish.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://art/Team_Pink/image.png" type="Texture" id=15]
 [ext_resource path="res://art/Team_Pink/jellyfish.png" type="Texture" id=16]
 [ext_resource path="res://art/Team_Pink/myra.png" type="Texture" id=17]
+[ext_resource path="res://sound/energy-90321.mp3" type="AudioStream" id=18]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -106,3 +107,6 @@ animation = "hedgehog"
 position = Vector2( 0, 1.5 )
 rotation = 1.5708
 shape = SubResource( 2 )
+
+[node name="FireUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )

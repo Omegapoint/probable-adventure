@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://FOOTBALL_FIELD.jpg" type="Texture" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://DiloWorld-mLJLv.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://sound/yay-6120.mp3" type="AudioStream" id=6]
 [ext_resource path="res://goal_pink.png" type="Texture" id=7]
+[ext_resource path="res://one-2.png" type="Texture" id=8]
+[ext_resource path="res://two-2.png" type="Texture" id=9]
+[ext_resource path="res://zero-2.png" type="Texture" id=10]
+[ext_resource path="res://three-2.png" type="Texture" id=11]
+[ext_resource path="res://sound/three-two-one-fight-deep-voice-38382.mp3" type="AudioStream" id=12]
 
 [sub_resource type="DynamicFont" id=5]
 size = 200
@@ -77,8 +82,14 @@ align = 1
 position = Vector2( 960, 540 )
 physics_material_override = SubResource( 1 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Ball"]
+[node name="GoalYay" type="AudioStreamPlayer" parent="Ball"]
 stream = ExtResource( 6 )
+
+[node name="One" type="Sprite" parent="."]
+visible = false
+position = Vector2( 960, 536 )
+scale = Vector2( 0.695599, 0.692003 )
+texture = ExtResource( 8 )
 
 [node name="wall" type="StaticBody2D" parent="."]
 
@@ -133,5 +144,26 @@ shape = SubResource( 7 )
 [node name="CollisionShape2D13" type="CollisionShape2D" parent="wall"]
 position = Vector2( 1920, 0 )
 shape = SubResource( 7 )
+
+[node name="Two" type="Sprite" parent="."]
+visible = false
+position = Vector2( 960, 544 )
+scale = Vector2( 0.695312, 0.695312 )
+texture = ExtResource( 9 )
+
+[node name="Zero" type="Sprite" parent="."]
+visible = false
+position = Vector2( 952, 544 )
+scale = Vector2( 0.695312, 0.695312 )
+texture = ExtResource( 10 )
+
+[node name="Three" type="Sprite" parent="."]
+visible = false
+position = Vector2( 952, 544 )
+scale = Vector2( 0.695312, 0.695312 )
+texture = ExtResource( 11 )
+
+[node name="Countdown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
 
 [connection signal="child_entered_tree" from="." to="." method="_on_Main_child_entered_tree"]

@@ -35,8 +35,10 @@ func _ready():
 		var coordinate = playerCoordinateList[i]
 		create_player(i + 1,coordinate[0],coordinate[1])
 	
+	$Countdown.play()
+	
 	timer.connect("timeout",self,"do_this")
-	timer.wait_time = 10
+	timer.wait_time = 20
 	timer.one_shot = true
 	add_child(timer)
 	
@@ -61,6 +63,21 @@ func create_player(id,x,y):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if pre_timer.time_left > 2:
+		$"Three".visible = true
+	
+	elif pre_timer.time_left > 1:
+		$"Three".visible = false
+		$"Two".visible = true
+	
+	elif pre_timer.time_left > 0:
+		$"Two".visible = false
+		$"One".visible = true
+		
+	#elif pre_timer.time_left > 0:
+	#	$"One".visible = false
+	#	$"Zero".visible = true
+	
 	pass
 
 func do_this():
@@ -73,5 +90,6 @@ func do_this():
 func preview():
 	print("preview")
 	stopped = false
+	$"One".visible = false
 	#get_tree().get_root().get_node("Player").stopped = false
 
