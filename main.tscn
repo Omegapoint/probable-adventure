@@ -43,12 +43,14 @@ texture = ExtResource( 2 )
 [node name="GoalPink" type="Sprite" parent="."]
 position = Vector2( 1968, 512 )
 scale = Vector2( 0.188649, 0.153676 )
+z_index = 6
 texture = ExtResource( 7 )
 flip_h = true
 
 [node name="GoalRight" type="Sprite" parent="."]
 position = Vector2( -40, 512 )
 scale = Vector2( 0.188649, 0.153676 )
+z_index = 6
 texture = ExtResource( 4 )
 
 [node name="score_brown" type="Label" parent="."]

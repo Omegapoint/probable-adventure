@@ -1,6 +1,9 @@
 extends Node2D
 
+var timer = Timer.new()
+var pre_timer = Timer.new()
 var player = preload("res://Player.tscn")
+export var stopped = true
 var nrOfPlayers = 8
 var playerList = []
 var playerCoordinateList = [
@@ -31,6 +34,19 @@ func _ready():
 	for i in nrOfPlayers:
 		var coordinate = playerCoordinateList[i]
 		create_player(i + 1,coordinate[0],coordinate[1])
+	
+	timer.connect("timeout",self,"do_this")
+	timer.wait_time = 10
+	timer.one_shot = true
+	add_child(timer)
+	
+	pre_timer.connect("timeout",self,"preview")
+	pre_timer.wait_time = 3
+	pre_timer.one_shot = true
+	add_child(pre_timer)
+	
+	timer.start()
+	pre_timer.start()
 
 func create_player(id,x,y):
 	var player_instance = player.instance()
@@ -46,3 +62,16 @@ func create_player(id,x,y):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func do_this():
+	#print('wait 3 seconds and do this....')
+	get_tree().change_scene("res://Menu.tscn")
+	print("preview")
+	stopped = false
+	#get_tree().get_root().get_node("Player").stopped = false
+
+func preview():
+	print("preview")
+	stopped = false
+	#get_tree().get_root().get_node("Player").stopped = false
+

@@ -1,6 +1,7 @@
 extends KinematicBody2D
 var id = 1 # Just to have a default for running this script solo
 export var speed = 100 # How fast the player will move (pixels/sec).
+export var stopped = true
 var screen_size
 
 # For specific characters
@@ -142,12 +143,13 @@ func _process(delta):
 	else:
 		$AnimatedSprite.stop()
 	
-	# Handles movement and bounce 
-	var collide = move_and_collide(velocity * delta)
-	if collide:
-		velocity.x = velocity.x * (-1)
-		velocity.y = velocity.y * (-1)
-		rotation = (rotation) + (PI)
+	if(not get_tree().get_root().get_node("Main").stopped):
+		# Handles movement and bounce 
+		var collide = move_and_collide(velocity * delta)
+		if collide:
+			velocity.x = velocity.x * (-1)
+			velocity.y = velocity.y * (-1)
+			rotation = (rotation) + (PI)
 
 
 
