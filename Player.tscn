@@ -92,11 +92,17 @@ radius = 29.4999
 height = 19.0002
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 471, 263 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="Fire" type="Sprite" parent="."]
+visible = false
+position = Vector2( -8, 0 )
+rotation = 4.71239
+scale = Vector2( 0.210938, 0.210938 )
+texture = ExtResource( 10 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.15, 0.15 )

@@ -114,14 +114,16 @@ func _process(delta):
 	if !speedDashCooldown:
 		if Input.is_action_pressed(moveUp):
 			$FireUp.play()
-			currentSprite = dashSprite
+			#currentSprite = characterSprite #dashSprite
+			$Fire.visible = true
 			speed = 2000
 			speedDashTime += 1
 			
 			if speedDashTime >= 10:
 				speedDashCooldown = true 
 				speedDashTime = 0
-				currentSprite = characterSprite
+				#currentSprite = characterSprite
+				$Fire.visible = false
 		
 		# Needed in order to not get stuck in dash sprite if you do a quick dash
 		if(Input.is_action_just_released(moveUp)):
