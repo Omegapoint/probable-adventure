@@ -116,6 +116,7 @@ func _process(delta):
 			$FireUp.play()
 			#currentSprite = characterSprite #dashSprite
 			$Fire.visible = true
+			$ProgressBar.value = 0
 			speed = 2000
 			speedDashTime += 1
 			
@@ -129,11 +130,13 @@ func _process(delta):
 		if(Input.is_action_just_released(moveUp)):
 			speedDashCooldown = true 
 			speedDashTime = 0
-			currentSprite = characterSprite
+			#currentSprite = characterSprite
+			$Fire.visible = false
 			
 	# Handles cooldown of the speed dash
 	if speedDashCooldown:
 		if speedDashCooldownTimer > 0:
+			$ProgressBar.value += 1
 			speedDashCooldownTimer -= 1
 		else:
 			speedDashCooldown = false

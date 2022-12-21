@@ -91,11 +91,11 @@ func _process(delta):
 
 func do_this():
 	if(int($score_blue.text) > int($score_brown.text)):
-		$TeamWonNode/TeamWon.add_color_override("font_color", Color(1,0,1))
+		$TeamWonNode/TeamWon.add_color_override("font_color", Color(0,0,1))
 		$TeamWonNode/TeamWon.text = "Blue Team Won"
 		$Trophy.visible = true
 	elif(int($score_blue.text) < int($score_brown.text)):
-		$TeamWonNode/TeamWon.add_color_override("font_color", Color(0.4,0.2,0.5))
+		$TeamWonNode/TeamWon.add_color_override("font_color", Color(1,0,0))
 		$TeamWonNode/TeamWon.text = "Red Team Won"
 		$Trophy.visible = true
 	else:

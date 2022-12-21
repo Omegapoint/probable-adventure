@@ -14,8 +14,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var moveRight = "moveRight_arrow"
-	var moveLeft = "moveLeft_arrow"
+
 	if Input.is_action_pressed("menu_down"):
 		if(counter == 0):
 			counter = 1
