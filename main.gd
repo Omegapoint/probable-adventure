@@ -81,7 +81,7 @@ func _process(delta):
 		get_node("timer_board2").text = "Time left: " + String(round(minutes)) + " min " + String(round(seconds)) + " sec "
 		
 	elif round(timer.time_left) <= 10 :
-		get_node("timer_board1").add_color_override("font_color", Color(0,0,1))
+		get_node("timer_board1").add_color_override("font_color", Color(randf()*2, 0,0))
 		get_node("timer_board1").text = "Time left: " + String(round(timer.time_left)) + " sec"
 		get_node("timer_board2").text = "Time left: " + String(round(timer.time_left)) + " sec"
 		
