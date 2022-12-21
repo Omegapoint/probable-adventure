@@ -104,7 +104,7 @@ text = "0"
 align = 1
 
 [node name="Ball" parent="." instance=ExtResource( 3 )]
-position = Vector2( 80, 640 )
+position = Vector2( 960, 536 )
 physics_material_override = SubResource( 1 )
 
 [node name="GoalYay" type="AudioStreamPlayer" parent="Ball"]

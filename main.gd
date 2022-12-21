@@ -81,7 +81,8 @@ func _process(delta):
 		get_node("timer_board2").text = "Time left: " + String(round(minutes)) + " min " + String(round(seconds)) + " sec "
 		
 	elif round(timer.time_left) <= 10 :
-		get_node("timer_board1").add_color_override("font_color", Color(randf()*2, 0,0))
+		get_node("timer_board1").add_color_override("font_color", Color(timer.time_left/10, 0,0))
+		get_node("timer_board2").add_color_override("font_color", Color(timer.time_left/10, 0,0))
 		get_node("timer_board1").text = "Time left: " + String(round(timer.time_left)) + " sec"
 		get_node("timer_board2").text = "Time left: " + String(round(timer.time_left)) + " sec"
 		
@@ -99,11 +100,11 @@ func _process(delta):
 
 func do_this():
 	if(int($score_blue.text) > int($score_brown.text)):
-		$TeamWonNode/TeamWon.add_color_override("font_color", Color(0,0,1))
+		$TeamWonNode/TeamWon.add_color_override("font_color", Color(1,0,0))
 		$TeamWonNode/TeamWon.text = "Red Team Won"
 		$Trophy.visible = true
 	elif(int($score_blue.text) < int($score_brown.text)):
-		$TeamWonNode/TeamWon.add_color_override("font_color", Color(1,0,0))
+		$TeamWonNode/TeamWon.add_color_override("font_color", Color(0,0,1))
 		$TeamWonNode/TeamWon.text = "Blue Team Won"
 		$Trophy.visible = true
 	else:
