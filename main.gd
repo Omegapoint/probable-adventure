@@ -37,7 +37,7 @@ func _ready():
 	$Countdown.play()
 	
 	timer.connect("timeout",self,"do_this")
-	timer.wait_time = 20
+	timer.wait_time = 10
 	timer.one_shot = true
 	add_child(timer)
 	
@@ -74,8 +74,8 @@ func _process(delta):
 		$"One".visible = true
 		
 	if timer.time_left > 60:
-		var minutes := round(timer.time_left) / 60
-		var seconds := fmod(round(timer.time_left), 60)
+		var minutes := floor(timer.time_left / 60)
+		var seconds := fmod(floor(timer.time_left), 60)
 		
 		get_node("timer_board1").text = "Time left: " + String(round(minutes)) + " min " + String(round(seconds)) + " sec "
 		get_node("timer_board2").text = "Time left: " + String(round(minutes)) + " min " + String(round(seconds)) + " sec "
@@ -89,6 +89,10 @@ func _process(delta):
 		get_node("timer_board1").text = "Time left: " + String(round(timer.time_left)) + " sec"
 		get_node("timer_board2").text = "Time left: " + String(round(timer.time_left)) + " sec"
 		
+	
+	if floor(timer.time_left) == 3 :
+		$End_Countdown.play()	
+	
 	if(game_over):
 		if(Input.is_action_pressed("start_game")):
 			get_tree().change_scene("res://Menu.tscn")
