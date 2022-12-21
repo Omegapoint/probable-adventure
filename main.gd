@@ -19,14 +19,12 @@ var playerCoordinateList = [
 	[1470,190],
 	[1170,540]
 	]
-
-
+	
 # Map boundary 
 var mapX
 var mapY
 var game_over = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	var mapSize = get_viewport_rect().size
 	mapX = int(mapSize.x)
@@ -63,7 +61,6 @@ func create_player(id,x,y):
 	add_child(player_instance)
 	playerList.append(player_instance)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if pre_timer.time_left > 2:
 		$"Three".visible = true
@@ -94,21 +91,15 @@ func _process(delta):
 	if(game_over):
 		if(Input.is_action_pressed("start_game")):
 			get_tree().change_scene("res://Menu.tscn")
-		
-		
-	#elif pre_timer.time_left > 0:
-	#	$"One".visible = false
-	#	$"Zero".visible = true
-	
 
 func do_this():
 	if(int($score_blue.text) > int($score_brown.text)):
 		$TeamWonNode/TeamWon.add_color_override("font_color", Color(0,0,1))
-		$TeamWonNode/TeamWon.text = "Blue Team Won"
+		$TeamWonNode/TeamWon.text = "Red Team Won"
 		$Trophy.visible = true
 	elif(int($score_blue.text) < int($score_brown.text)):
 		$TeamWonNode/TeamWon.add_color_override("font_color", Color(1,0,0))
-		$TeamWonNode/TeamWon.text = "Red Team Won"
+		$TeamWonNode/TeamWon.text = "Blue Team Won"
 		$Trophy.visible = true
 	else:
 		$TeamWonNode/PawLeft.visible = true
@@ -123,9 +114,15 @@ func do_this():
 	#get_tree().change_scene("res://Menu.tscn")
 
 func preview():
-	print("preview")
 	stopped = false
 	timer.paused = false
 	$"One".visible = false
-	#get_tree().get_root().get_node("Player").stopped = false
+
+func _on_Ball_goal():
+	stopped = true
+	timer.paused = true
+	for character in range(len(playerList)):
+		playerList[character].position = Vector2(playerCoordinateList[character][0], playerCoordinateList[character][1])
+	pre_timer.start()
+	$Countdown.play()
 

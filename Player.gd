@@ -114,7 +114,6 @@ func _process(delta):
 	if !speedDashCooldown:
 		if Input.is_action_pressed(moveUp):
 			$FireUp.play()
-			#currentSprite = characterSprite #dashSprite
 			$Fire.visible = true
 			$ProgressBar.value = 0
 			speed = 2000
@@ -123,7 +122,6 @@ func _process(delta):
 			if speedDashTime >= 10:
 				speedDashCooldown = true 
 				speedDashTime = 0
-				#currentSprite = characterSprite
 				$Fire.visible = false
 		
 		# Needed in order to not get stuck in dash sprite if you do a quick dash
@@ -156,8 +154,3 @@ func _process(delta):
 			velocity.x = velocity.x * (-1)
 			velocity.y = velocity.y * (-1)
 			rotation = (rotation) + (PI)
-
-
-
-
-

@@ -103,7 +103,7 @@ text = "0"
 align = 1
 
 [node name="Ball" parent="." instance=ExtResource( 3 )]
-position = Vector2( 960, 540 )
+position = Vector2( 80, 640 )
 physics_material_override = SubResource( 1 )
 
 [node name="GoalYay" type="AudioStreamPlayer" parent="Ball"]
@@ -258,3 +258,4 @@ align = 1
 stream = ExtResource( 16 )
 
 [connection signal="child_entered_tree" from="." to="." method="_on_Main_child_entered_tree"]
+[connection signal="goal" from="Ball" to="." method="_on_Ball_goal"]
