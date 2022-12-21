@@ -39,7 +39,7 @@ func _ready():
 	$Countdown.play()
 	
 	timer.connect("timeout",self,"do_this")
-	timer.wait_time = 5
+	timer.wait_time = 10
 	timer.one_shot = true
 	add_child(timer)
 	
@@ -49,6 +49,7 @@ func _ready():
 	add_child(pre_timer)
 	
 	timer.start()
+	timer.paused = true
 	pre_timer.start()
 
 func create_player(id,x,y):
@@ -75,6 +76,9 @@ func _process(delta):
 		$"Two".visible = false
 		$"One".visible = true
 		
+	get_node("timer_board1").text = "Time left: " + String(round(timer.time_left)) + " seconds"
+	get_node("timer_board2").text = "Time left: " + String(round(timer.time_left)) + " seconds"
+	
 	if(game_over):
 		if(Input.is_action_pressed("start_game")):
 			get_tree().change_scene("res://Menu.tscn")
@@ -84,7 +88,6 @@ func _process(delta):
 	#	$"One".visible = false
 	#	$"Zero".visible = true
 	
-	pass
 
 func do_this():
 	if(int($score_blue.text) > int($score_brown.text)):
@@ -109,6 +112,7 @@ func do_this():
 func preview():
 	print("preview")
 	stopped = false
+	timer.paused = false
 	$"One".visible = false
 	#get_tree().get_root().get_node("Player").stopped = false
 
