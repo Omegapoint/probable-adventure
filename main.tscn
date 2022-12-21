@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://FOOTBALL_FIELD.jpg" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://trophy.png" type="Texture" id=13]
 [ext_resource path="res://paw-3.png" type="Texture" id=14]
 [ext_resource path="res://paw-2-2.png" type="Texture" id=15]
+[ext_resource path="res://sound/applause.mp3" type="AudioStream" id=16]
 
 [sub_resource type="DynamicFont" id=5]
 size = 200
@@ -252,5 +253,8 @@ rect_rotation = 180.0
 custom_colors/font_color = Color( 0.498039, 0.0980392, 0.0980392, 1 )
 custom_fonts/font = SubResource( 11 )
 align = 1
+
+[node name="Applause" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
 
 [connection signal="child_entered_tree" from="." to="." method="_on_Main_child_entered_tree"]

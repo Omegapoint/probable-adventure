@@ -107,6 +107,7 @@ func do_this():
 	stopped = true
 
 	game_over = true
+	$Applause.play()
 	#get_tree().change_scene("res://Menu.tscn")
 
 func preview():
