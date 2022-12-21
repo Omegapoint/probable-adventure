@@ -30,21 +30,21 @@ func _ready():
 		moveRight = "moveRight_arrow"
 		moveLeft = "moveLeft_arrow"
 		moveUp = "moveUp_arrow"
-		characterSprite = "butterfly"
+		characterSprite = "starfish"
 		currentSprite =  characterSprite
 		characterSpeed = 200
 	elif (id == 2):
 		moveRight = "moveRight_D"
 		moveLeft = "moveLeft_A"
 		moveUp = "moveUp_W"
-		characterSprite = "crawfish"
+		characterSprite = "jellyfish"
 		currentSprite = characterSprite
 		characterSpeed= 200
 	elif (id == 3):
 		moveRight = "moveRight_M"
 		moveLeft = "moveLeft_N"
 		moveUp = "moveUp_J"
-		characterSprite = "fish"
+		characterSprite = "crab"
 		currentSprite = characterSprite
 		characterSpeed = 200
 	elif (id == 4):
@@ -58,7 +58,7 @@ func _ready():
 		moveRight = "moveRight_H"
 		moveLeft = "moveLeft_F"
 		moveUp = "moveUp_T"
-		characterSprite = "crab"
+		characterSprite = "bee"
 		currentSprite =  characterSprite
 		characterSpeed = 200
 		rotation += PI
@@ -67,7 +67,7 @@ func _ready():
 		moveRight = "moveRight_3"
 		moveLeft = "moveLeft_1"
 		moveUp = "moveUp_2"
-		characterSprite = "dolphin"
+		characterSprite = "butterfly"
 		currentSprite = characterSprite
 		characterSpeed= 200
 		rotation += PI
@@ -76,7 +76,7 @@ func _ready():
 		moveRight = "moveRight_6"
 		moveLeft = "moveLeft_4"
 		moveUp = "moveUp_5"
-		characterSprite = "ant"
+		characterSprite = "ladybug"
 		currentSprite = characterSprite
 		characterSpeed = 200
 		rotation += PI
@@ -85,7 +85,7 @@ func _ready():
 		moveRight = "moveRight_9"
 		moveLeft = "moveLeft_7"
 		moveUp = "moveUp_8"
-		characterSprite = "jellyfish"
+		characterSprite = "bat"
 		currentSprite = characterSprite
 		characterSpeed = 200
 		rotation += PI
