@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/starwars.mp3-29af4eb7b2dba66a2f08d726aae75fa2.mp3str"
+
+[deps]
+
+source_file="res://sound/starwars.mp3"
+dest_files=[ "res://.import/starwars.mp3-29af4eb7b2dba66a2f08d726aae75fa2.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
