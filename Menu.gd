@@ -3,6 +3,7 @@ var counter = 0
 var counter2 = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$TransitionScreen.visible = true
 	$Background_music.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,8 +33,13 @@ func _process(delta):
 			$Button2.texture = load("res://.import/button.png-234620e182281afdeb4aab4d2ed4f8a7.stex")
 	elif(Input.is_action_pressed("start_game")):
 		if(counter == 0):
-			get_tree().change_scene("res://main.tscn")
+			$TransitionScreen.transition()
 		else:
 			get_tree().quit()
 	pass
 
+
+
+func _on_TransitionScreen_transitioned():
+	get_tree().change_scene("res://main.tscn")
+	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://FOOTBALL_FIELD.jpg" type="Texture" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://paw-2-2.png" type="Texture" id=15]
 [ext_resource path="res://sound/applause.mp3" type="AudioStream" id=16]
 [ext_resource path="res://sound/end-countdown.mp3" type="AudioStream" id=17]
+[ext_resource path="res://flags.png" type="Texture" id=18]
+[ext_resource path="res://fade_scene.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFont" id=5]
 size = 200
@@ -43,7 +45,7 @@ extents = Vector2( 1108, 100 )
 radius = 48.0
 
 [sub_resource type="DynamicFont" id=8]
-size = 100
+size = 200
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
@@ -104,7 +106,7 @@ text = "0"
 align = 1
 
 [node name="Ball" parent="." instance=ExtResource( 3 )]
-position = Vector2( 960, 536 )
+position = Vector2( 72, 632 )
 physics_material_override = SubResource( 1 )
 
 [node name="GoalYay" type="AudioStreamPlayer" parent="Ball"]
@@ -193,20 +195,25 @@ stream = ExtResource( 12 )
 
 [node name="Trophy" type="Sprite" parent="."]
 visible = false
-position = Vector2( 968, 712 )
-scale = Vector2( 1.28906, 1.28906 )
+position = Vector2( 960, 736 )
+scale = Vector2( 1.00391, 1.00391 )
 z_index = 6
 texture = ExtResource( 13 )
 
 [node name="TeamWonNode" type="Node2D" parent="."]
 z_index = 6
 
+[node name="Flags" type="Sprite" parent="TeamWonNode"]
+visible = false
+position = Vector2( 944, 200 )
+scale = Vector2( 0.626667, 0.626667 )
+texture = ExtResource( 18 )
+
 [node name="TeamWon" type="Label" parent="TeamWonNode"]
 visible = false
-margin_left = 608.0
-margin_top = 64.0
-margin_right = 1310.0
-margin_bottom = 304.0
+margin_top = 128.0
+margin_right = 1912.0
+margin_bottom = 368.0
 custom_colors/font_color = Color( 0.494118, 0.168627, 0.929412, 1 )
 custom_fonts/font = SubResource( 8 )
 text = "Draw"
@@ -215,9 +222,9 @@ valign = 1
 
 [node name="RedButton" type="Label" parent="TeamWonNode"]
 visible = false
-margin_top = 128.0
+margin_top = 280.0
 margin_right = 1920.0
-margin_bottom = 392.0
+margin_bottom = 544.0
 custom_fonts/font = SubResource( 9 )
 text = "Press the red button to continue"
 align = 1
@@ -225,14 +232,14 @@ valign = 1
 
 [node name="PawLeft" type="Sprite" parent="TeamWonNode"]
 visible = false
-position = Vector2( 744, 440 )
+position = Vector2( 752, 608 )
 rotation = 1.5708
 scale = Vector2( 0.706694, 0.706694 )
 texture = ExtResource( 14 )
 
 [node name="PawRight" type="Sprite" parent="TeamWonNode"]
 visible = false
-position = Vector2( 1128, 448 )
+position = Vector2( 1128, 608 )
 rotation = -1.5708
 scale = Vector2( 0.5625, 0.5625 )
 texture = ExtResource( 15 )
@@ -261,5 +268,9 @@ stream = ExtResource( 16 )
 [node name="End_Countdown" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
 
+[node name="TransitionScreen" parent="." instance=ExtResource( 19 )]
+visible = false
+
 [connection signal="child_entered_tree" from="." to="." method="_on_Main_child_entered_tree"]
 [connection signal="goal" from="Ball" to="." method="_on_Ball_goal"]
+[connection signal="transitioned" from="TransitionScreen" to="." method="_on_TransitionScreen_transitioned"]

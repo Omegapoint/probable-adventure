@@ -26,6 +26,7 @@ var mapY
 var game_over = false
 
 func _ready():
+	$TransitionScreen.visible = true
 	var mapSize = get_viewport_rect().size
 	mapX = int(mapSize.x)
 	mapY = int(mapSize.y)
@@ -96,7 +97,7 @@ func _process(delta):
 	
 	if(game_over):
 		if(Input.is_action_pressed("start_game")):
-			get_tree().change_scene("res://Menu.tscn")
+			$TransitionScreen.transition()
 
 func do_this():
 	if(int($score_blue.text) > int($score_brown.text)):
@@ -108,8 +109,9 @@ func do_this():
 		$TeamWonNode/TeamWon.text = "Blue Team Won"
 		$Trophy.visible = true
 	else:
-		$TeamWonNode/PawLeft.visible = true
-		$TeamWonNode/PawRight.visible = true
+		$TeamWonNode/PawLeft.visible = false
+		$TeamWonNode/PawRight.visible = false
+	$TeamWonNode/Flags.visible = true
 	$TeamWonNode/RedButton.visible = true
 	$TeamWonNode/TeamWon.visible = true
 	$Ball.linear_velocity = Vector2(0,0)
@@ -132,3 +134,5 @@ func _on_Ball_goal():
 	pre_timer.start()
 	$Countdown.play()
 
+func _on_TransitionScreen_transitioned():
+	get_tree().change_scene("res://Menu.tscn")
