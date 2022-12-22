@@ -21,8 +21,8 @@ _global_script_class_icons={
 [application]
 
 config/name="probable-adventure"
-run/main_scene="res://Menu.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://scenes/Menu.tscn"
+config/icon="res://art/Playing_field/football.png"
 
 [display]
 

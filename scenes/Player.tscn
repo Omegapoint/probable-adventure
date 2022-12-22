@@ -1,0 +1,174 @@
+[gd_scene load_steps=35 format=2]
+
+[ext_resource path="res://scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://art/Team_left/shark2.png" type="Texture" id=2]
+[ext_resource path="res://art/Team_right/butterfly.png" type="Texture" id=3]
+[ext_resource path="res://art/Team_right/butterfly2.png" type="Texture" id=4]
+[ext_resource path="res://art/Team_left/shark.png" type="Texture" id=5]
+[ext_resource path="res://art/Team_left/crab2.png" type="Texture" id=6]
+[ext_resource path="res://art/Team_left/starfish2.png" type="Texture" id=7]
+[ext_resource path="res://sound/energy-90321.mp3" type="AudioStream" id=8]
+[ext_resource path="res://art/Team_right/ladybug.png" type="Texture" id=9]
+[ext_resource path="res://art/Team_right/ladybug2.png" type="Texture" id=10]
+[ext_resource path="res://art/Team_right/bee.png" type="Texture" id=11]
+[ext_resource path="res://art/Team_right/bee2.png" type="Texture" id=12]
+[ext_resource path="res://art/Team_right/bat2.png" type="Texture" id=13]
+[ext_resource path="res://art/Team_right/bat.png" type="Texture" id=14]
+[ext_resource path="res://art/Team_left/jellyfish2.png" type="Texture" id=15]
+[ext_resource path="res://art/Team_left/starfish.png" type="Texture" id=16]
+[ext_resource path="res://art/Team_left/jellyfish.png" type="Texture" id=17]
+[ext_resource path="res://art/Team_left/crab.png" type="Texture" id=18]
+[ext_resource path="res://art/Old_Art/Team_Pink/myra.png" type="Texture" id=19]
+[ext_resource path="res://art/Old_Art/Team_Pink/image.png" type="Texture" id=20]
+[ext_resource path="res://art/Effects/fire.png" type="Texture" id=21]
+[ext_resource path="res://art/Old_Art/Team_Pink/image-2.png" type="Texture" id=22]
+[ext_resource path="res://art/Old_Art/Team_Blue/crawfish.png" type="Texture" id=23]
+[ext_resource path="res://art/Old_Art/Team_Blue/fish.png" type="Texture" id=24]
+[ext_resource path="res://art/Old_Art/Team_Brown/goat.png" type="Texture" id=25]
+[ext_resource path="res://art/Old_Art/Team_Brown/bear.png" type="Texture" id=26]
+[ext_resource path="res://art/Old_Art/Team_Brown/valross.png" type="Texture" id=27]
+[ext_resource path="res://art/Old_Art/Team_Brown/hedgehog.png" type="Texture" id=28]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 20 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "ant",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "bat",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 26 ) ],
+"loop": true,
+"name": "bear",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "bee",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "butterfly",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "crab",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "crawfish",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ) ],
+"loop": true,
+"name": "dash",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 22 ) ],
+"loop": true,
+"name": "dolphin",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 24 ) ],
+"loop": true,
+"name": "fish",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 25 ) ],
+"loop": true,
+"name": "goat",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 28 ) ],
+"loop": true,
+"name": "hedgehog",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "jellyfish",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "ladybug",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "shark",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "starfish",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 27 ) ],
+"loop": true,
+"name": "valross",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 29.4999
+height = 19.0002
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://art/Fonts/DiloWorld-mLJLv.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+font_data = SubResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 0.996078, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Fire" type="Sprite" parent="."]
+visible = false
+position = Vector2( -8, 0 )
+rotation = 4.71239
+scale = Vector2( 0.210938, 0.210938 )
+texture = ExtResource( 21 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.15, 0.15 )
+frames = SubResource( 1 )
+animation = "starfish"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1.5 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="FireUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = -40.0
+margin_top = -24.0
+margin_right = 8.0
+margin_bottom = -10.0
+rect_rotation = 89.9999
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
+max_value = 200.0
+value = 200.0
