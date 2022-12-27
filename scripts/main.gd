@@ -62,6 +62,7 @@ func _ready():
 	
 	#Start timers
 	timer.start()
+	yield(get_tree().create_timer(1), "timeout")
 	pre_timer.start()
 	timer.paused = true
 	
