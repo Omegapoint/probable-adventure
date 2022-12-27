@@ -128,11 +128,11 @@ func _process(_delta):
 func end():
 	
 	#Determine which team won and display the winner
-	if(int($score_blue.text) > int($score_brown.text)):
+	if(int($score_leftTeam.text) > int($score_rightTeam.text)):
 		$TeamWonNode/TeamWon.add_color_override("font_color", Color(1,0,0))
 		$TeamWonNode/TeamWon.text = "Red Team Won"
 		$Trophy.visible = true
-	elif(int($score_blue.text) < int($score_brown.text)):
+	elif(int($score_leftTeam.text) < int($score_rightTeam.text)):
 		$TeamWonNode/TeamWon.add_color_override("font_color", Color(0,0,1))
 		$TeamWonNode/TeamWon.text = "Blue Team Won"
 		$Trophy.visible = true
@@ -163,7 +163,14 @@ func kickoff():
 
 #Function called when there is a goal
 func _on_Ball_goal():
+		
+	var music_position
 	
+	#Stops the final countdown timer
+	if floor(timer.time_left) <= 3 :
+		music_position = $End_Countdown.get_playback_position()
+		$End_Countdown.stop()
+			
 	#Stops all players and the timer
 	stopped = true
 	timer.paused = true
@@ -178,6 +185,10 @@ func _on_Ball_goal():
 	#Plays the kick off sound
 	yield(get_tree().create_timer(3), "timeout")
 	$Play_off.play()
+	
+	#Resumes the final countdown timer
+	if floor(timer.time_left) <= 3 :
+		$End_Countdown.play(music_position)
 
 #Function called when the transition ends
 func _on_TransitionScreen_transitioned():

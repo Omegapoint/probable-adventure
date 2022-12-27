@@ -90,7 +90,7 @@ scale = Vector2( 0.188649, 0.153676 )
 z_index = 6
 texture = ExtResource( 15 )
 
-[node name="score_brown" type="Label" parent="."]
+[node name="score_rightTeam" type="Label" parent="."]
 margin_left = 704.0
 margin_top = 432.0
 margin_right = 958.0
@@ -100,7 +100,7 @@ custom_fonts/font = SubResource( 5 )
 text = "0"
 align = 1
 
-[node name="score_blue" type="Label" parent="."]
+[node name="score_leftTeam" type="Label" parent="."]
 margin_left = 968.0
 margin_top = 432.0
 margin_right = 1222.0
