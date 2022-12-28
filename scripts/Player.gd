@@ -6,6 +6,7 @@ export var stopped = true
 
 #PowerUp timer
 var powerUp_timer = Timer.new()
+var powerUp_timerScale = Timer.new()
 
 # For specific characters
 var moveRight
@@ -33,6 +34,11 @@ func _ready():
 	powerUp_timer.wait_time = 3
 	powerUp_timer.one_shot = true
 	add_child(powerUp_timer)
+	
+	powerUp_timerScale.connect("timeout",self,"end_powerupScale")
+	powerUp_timerScale.wait_time = 3
+	powerUp_timerScale.one_shot = true
+	add_child(powerUp_timerScale)
 	
 	print("Player " + str(id) + " is ready!")
 	
@@ -164,12 +170,17 @@ func _process(delta):
 		if collide:
 			if collide.collider.name in get_tree().get_root().get_node("Main").powerUpList_speed:
 				var pathName = "Main/" + collide.collider.name
-				get_tree().get_root().get_node(pathName).remove_and_skip()
+				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
 				get_tree().get_root().get_node("Main").powerUpList_speed.erase(collide.collider.name)
 				characterSpeed += 500
 				powerUp_timer.start()
 			elif collide.collider.name in get_tree().get_root().get_node("Main").powerUpList_scale:
-				print("hej")
+				var pathName = "Main/" + collide.collider.name
+				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
+				get_tree().get_root().get_node("Main").powerUpList_speed.erase(collide.collider.name)
+				scale.x = 2
+				scale.y = 2
+				powerUp_timerScale.start()
 			else:
 				velocity.x = velocity.x * (-1)
 				velocity.y = velocity.y * (-1)
@@ -177,3 +188,7 @@ func _process(delta):
 
 func end_powerup():
 	characterSpeed -= 500
+	
+func end_powerupScale():
+	scale.x = 1
+	scale.y = 1

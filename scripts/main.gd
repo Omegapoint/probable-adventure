@@ -19,10 +19,10 @@ var powerup_interval = Timer.new()
 var player = preload("res://scenes/Player.tscn")
 
 #PowerUp scene import
-var powerUP = preload("res://scenes/PowerUp.tscn")
+var powerUPSpeed = preload("res://scenes/PowerUp.tscn")
 
 #PowerUp scene import
-var powerUP2 = preload("res://scenes/PowerUp_scale.tscn")
+var powerUPScale = preload("res://scenes/PowerUp_scale.tscn")
 
 #Number of players
 var nrOfPlayers = 8
@@ -31,10 +31,10 @@ var nrOfPlayers = 8
 var playerList = []
 
 #List of all players in a match
-export var powerUpList_speed = []
+var powerUpList_speed = []
+var powerUpList_scale = []
 
 #List of all players in a match
-export var powerUpList_scale = []
 
 #Starting positions for 8 players 
 var playerCoordinateList = [
@@ -64,7 +64,7 @@ func _ready():
 	
 	#Setup main timer
 	timer.connect("timeout",self,"end")
-	timer.wait_time = 10
+	timer.wait_time = 20
 	timer.one_shot = true
 	add_child(timer)
 	
@@ -224,19 +224,15 @@ func add_powerUp():
 	rng.randomize()
 	
 	if rng.randf_range(0.0,1.0) > 0.5:
-		var Pu = powerUP2.instance()
-		print(Pu.name)
-		Pu.position.x = rng.randf_range(100, 1820)
-		Pu.position.y = rng.randf_range(100, 980)
-		add_child(Pu)
-		powerUpList_speed.append(Pu.name)
+		var speedInstance = powerUPSpeed.instance()
+		speedInstance.position.x = rng.randf_range(100, 1820)
+		speedInstance.position.y = rng.randf_range(100, 980)
+		add_child(speedInstance)
+		powerUpList_speed.append(speedInstance.name)
 	else:
-		var Pus = powerUP.instance()
-		print(Pus.name)
-		Pus.position.x = rng.randf_range(100, 1820)
-		Pus.position.y = rng.randf_range(100, 980)
-		add_child(Pus)
-		powerUpList_scale.append(Pus.name)
-	print(powerUpList_scale, "1")
-	print(powerUpList_speed, "2")
+		var scaleInstance = powerUPScale.instance()
+		scaleInstance.position.x = rng.randf_range(100, 1820)
+		scaleInstance.position.y = rng.randf_range(100, 980)
+		add_child(scaleInstance)
+		powerUpList_scale.append(scaleInstance.name)
 	powerup_interval.start()
