@@ -24,6 +24,8 @@ var powerUPSpeed = preload("res://scenes/PowerUp.tscn")
 #PowerUp scene import
 var powerUPScale = preload("res://scenes/PowerUp_scale.tscn")
 
+var powerUPSurprise = preload("res://scenes/PowerUpSurprise.tscn")
+
 #Number of players
 var nrOfPlayers = 8
 
@@ -31,8 +33,9 @@ var nrOfPlayers = 8
 var playerList = []
 
 #List of all players in a match
-var powerUpList_speed = []
-var powerUpList_scale = []
+var powerUpListSpeed = []
+var powerUpListScale = []
+var powerUpListSurprise = []
 
 #List of all players in a match
 
@@ -74,6 +77,7 @@ func _ready():
 	pre_timer.one_shot = true
 	add_child(pre_timer)
 	
+	
 	powerup_interval.connect("timeout",self,"add_powerUp")
 	powerup_interval.wait_time = 1
 	powerup_interval.one_shot = true
@@ -83,12 +87,12 @@ func _ready():
 	timer.start()
 	yield(get_tree().create_timer(1), "timeout")
 	pre_timer.start()
-	powerup_interval.start()
 	timer.paused = true
-	
-	
 	#Play sound
 	$Countdown.play()
+	
+	yield(get_tree().create_timer(5), "timeout")
+	powerup_interval.start()
 
 #Create a player
 func create_player(id,x,y):
@@ -222,17 +226,24 @@ func add_powerUp():
 	
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	
-	if rng.randf_range(0.0,1.0) > 0.5:
+	var probability = rng.randf_range(0.0,1.0) 
+	if probability < 0.4:
 		var speedInstance = powerUPSpeed.instance()
 		speedInstance.position.x = rng.randf_range(100, 1820)
 		speedInstance.position.y = rng.randf_range(100, 980)
 		add_child(speedInstance)
-		powerUpList_speed.append(speedInstance.name)
-	else:
+		powerUpListSpeed.append(speedInstance.name)
+	elif(probability < 0.8):
 		var scaleInstance = powerUPScale.instance()
 		scaleInstance.position.x = rng.randf_range(100, 1820)
 		scaleInstance.position.y = rng.randf_range(100, 980)
 		add_child(scaleInstance)
-		powerUpList_scale.append(scaleInstance.name)
+		powerUpListScale.append(scaleInstance.name)
+	else:
+		var surpriseInstance = powerUPSurprise.instance()
+		surpriseInstance.position.x = rng.randf_range(100, 1820)
+		surpriseInstance.position.y = rng.randf_range(100, 980)
+		add_child(surpriseInstance)
+		powerUpListSurprise.append(surpriseInstance.name)
+		print("hej")
 	powerup_interval.start()
