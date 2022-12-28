@@ -12,14 +12,29 @@ var timer = Timer.new()
 #Playoff timer
 var pre_timer = Timer.new()
 
+#Powerup interval -timer
+var powerup_interval = Timer.new()
+
 #Player scene import
 var player = preload("res://scenes/Player.tscn")
+
+#PowerUp scene import
+var powerUP = preload("res://scenes/PowerUp.tscn")
+
+#PowerUp scene import
+var powerUP2 = preload("res://scenes/PowerUp_scale.tscn")
 
 #Number of players
 var nrOfPlayers = 8
 
 #List of all players in a match
 var playerList = []
+
+#List of all players in a match
+export var powerUpList_speed = []
+
+#List of all players in a match
+export var powerUpList_scale = []
 
 #Starting positions for 8 players 
 var playerCoordinateList = [
@@ -39,7 +54,6 @@ var playerCoordinateList = [
 
 #Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	#Transition from black screen into game
 	$TransitionScreen.visible = true
 	
@@ -60,11 +74,18 @@ func _ready():
 	pre_timer.one_shot = true
 	add_child(pre_timer)
 	
+	powerup_interval.connect("timeout",self,"add_powerUp")
+	powerup_interval.wait_time = 1
+	powerup_interval.one_shot = true
+	add_child(powerup_interval)
+	
 	#Start timers
 	timer.start()
 	yield(get_tree().create_timer(1), "timeout")
 	pre_timer.start()
+	powerup_interval.start()
 	timer.paused = true
+	
 	
 	#Play sound
 	$Countdown.play()
@@ -196,3 +217,26 @@ func _on_TransitionScreen_transitioned():
 	
 	#Switch back to menu
 	return get_tree().change_scene("res://scenes/Menu.tscn")
+	
+func add_powerUp():
+	
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	
+	if rng.randf_range(0.0,1.0) > 0.5:
+		var Pu = powerUP2.instance()
+		print(Pu.name)
+		Pu.position.x = rng.randf_range(100, 1820)
+		Pu.position.y = rng.randf_range(100, 980)
+		add_child(Pu)
+		powerUpList_speed.append(Pu.name)
+	else:
+		var Pus = powerUP.instance()
+		print(Pus.name)
+		Pus.position.x = rng.randf_range(100, 1820)
+		Pus.position.y = rng.randf_range(100, 980)
+		add_child(Pus)
+		powerUpList_scale.append(Pus.name)
+	print(powerUpList_scale, "1")
+	print(powerUpList_speed, "2")
+	powerup_interval.start()

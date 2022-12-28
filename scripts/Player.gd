@@ -4,6 +4,9 @@ var id = 1 # Just to have a default for running this script solo
 export var speed = 100 # How fast the player will move (pixels/sec).
 export var stopped = true
 
+#PowerUp timer
+var powerUp_timer = Timer.new()
+
 # For specific characters
 var moveRight
 var moveLeft
@@ -24,6 +27,13 @@ var speedDashTime = 0
 # Here we can set unique stats for different characters
 # Hardcoded for now, max 8 players though so maybe this logic is fine?
 func _ready():
+	
+	#setup playoff timer
+	powerUp_timer.connect("timeout",self,"end_powerup")
+	powerUp_timer.wait_time = 3
+	powerUp_timer.one_shot = true
+	add_child(powerUp_timer)
+	
 	print("Player " + str(id) + " is ready!")
 	
 	if(id == 1):
@@ -113,6 +123,7 @@ func _process(delta):
 	# Handles the dash, sets the speed of a dash and  how long it lasts
 	if !speedDashCooldown:
 		if Input.is_action_pressed(moveUp):
+			
 			$FireUp.play()
 			$Fire.visible = true
 			$ProgressBar.value = 0
@@ -151,6 +162,18 @@ func _process(delta):
 		# Handles movement and bounce 
 		var collide = move_and_collide(velocity * delta)
 		if collide:
-			velocity.x = velocity.x * (-1)
-			velocity.y = velocity.y * (-1)
-			rotation = (rotation) + (PI)
+			if collide.collider.name in get_tree().get_root().get_node("Main").powerUpList_speed:
+				var pathName = "Main/" + collide.collider.name
+				get_tree().get_root().get_node(pathName).remove_and_skip()
+				get_tree().get_root().get_node("Main").powerUpList_speed.erase(collide.collider.name)
+				characterSpeed += 500
+				powerUp_timer.start()
+			elif collide.collider.name in get_tree().get_root().get_node("Main").powerUpList_scale:
+				print("hej")
+			else:
+				velocity.x = velocity.x * (-1)
+				velocity.y = velocity.y * (-1)
+				rotation = (rotation) + (PI)
+
+func end_powerup():
+	characterSpeed -= 500
