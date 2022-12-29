@@ -4,8 +4,11 @@
 [ext_resource path="res://scenes/PowerUp_scale.gd" type="Script" id=2]
 
 [sub_resource type="Environment" id=1]
+resource_local_to_scene = true
 background_mode = 4
 glow_enabled = true
+glow_high_quality = true
+adjustment_enabled = true
 
 [sub_resource type="Animation" id=2]
 length = 0.001
