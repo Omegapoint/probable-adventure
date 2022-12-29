@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://art/Team_left/shark2.png" type="Texture" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://art/Fonts/DiloWorld-mLJLv.ttf" type="DynamicFontData" id=29]
 [ext_resource path="res://sound/success_sound.mp3" type="AudioStream" id=30]
 [ext_resource path="res://sound/fail_sound.mp3" type="AudioStream" id=31]
+[ext_resource path="res://sound/eating_snack.mp3" type="AudioStream" id=32]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -201,3 +202,6 @@ stream = ExtResource( 30 )
 
 [node name="FailSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 31 )
+
+[node name="SnackSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 32 )

@@ -169,12 +169,14 @@ func _process(delta):
 		var collide = move_and_collide(velocity * delta)
 		if collide:
 			if collide.collider.name in get_tree().get_root().get_node("Main").powerUpListSpeed:
+				$SnackSound.play()
 				var pathName = "Main/" + collide.collider.name
 				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
 				get_tree().get_root().get_node("Main").powerUpListSpeed.erase(collide.collider.name)
 				characterSpeed += 500
 				powerUp_timer.start()
 			elif collide.collider.name in get_tree().get_root().get_node("Main").powerUpListScale:
+				$SnackSound.play()
 				var pathName = "Main/" + collide.collider.name
 				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
 				get_tree().get_root().get_node("Main").powerUpListScale.erase(collide.collider.name)
