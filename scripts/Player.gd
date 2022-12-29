@@ -185,16 +185,39 @@ func _process(delta):
 				var pathName = "Main/" + collide.collider.name
 				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
 				get_tree().get_root().get_node("Main").powerUpListSurprise.erase(collide.collider.name)
-				print("goal")
-				if(id in [0,1,2,3]):
-					var curr_goal = int(get_tree().get_root().get_node("Main/score_leftTeam").text) 
-					get_tree().get_root().get_node("Main/score_leftTeam").text = String(curr_goal + 1)
+				$PowerUpLabel.visible = true
+				var rng = RandomNumberGenerator.new()
+				rng.randomize()
+				var probability = rng.randf_range(0.0,1.0) 
+				if(id in [4,5,6,7]):
+					if(probability < 0.5):
+						$PowerUpLabel.add_color_override("font_color", Color(1,1,0))
+						$PowerUpLabel.text = "+1"
+						var curr_goal = int(get_tree().get_root().get_node("Main/score_leftTeam").text) 
+						get_tree().get_root().get_node("Main/score_leftTeam").text = String(curr_goal + 1)
+						get_tree().get_root().get_node("Main/Ball").counter_left= curr_goal + 1
+					else:
+						$PowerUpLabel.add_color_override("font_color", Color(1,0,0))
+						$PowerUpLabel.text = "-1"
+						var curr_goal = int(get_tree().get_root().get_node("Main/score_leftTeam").text) 
+						get_tree().get_root().get_node("Main/score_leftTeam").text = String(curr_goal - 1)
+						get_tree().get_root().get_node("Main/Ball").counter_left= curr_goal - 1
 				else:
-					var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
-					get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal + 1)
-				
+					if(probability < 0.5):
+						$PowerUpLabel.add_color_override("font_color", Color(1,1,0))
+						$PowerUpLabel.text = "+1"
+						var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
+						get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal + 1)
+						get_tree().get_root().get_node("Main/Ball").counter_right= curr_goal + 1
+					else:
+						$PowerUpLabel.add_color_override("font_color", Color(1,0,0))
+						$PowerUpLabel.text = "-1"
+						var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
+						get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal - 1)
+						get_tree().get_root().get_node("Main/Ball").counter_right= curr_goal - 1
+				yield(get_tree().create_timer(2), "timeout")
+				$PowerUpLabel.visible = false
 			else:
-				
 				velocity.x = velocity.x * (-1)
 				velocity.y = velocity.y * (-1)
 				rotation = (rotation) + (PI)

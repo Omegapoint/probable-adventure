@@ -67,7 +67,7 @@ func _ready():
 	
 	#Setup main timer
 	timer.connect("timeout",self,"end")
-	timer.wait_time = 20
+	timer.wait_time = 50
 	timer.one_shot = true
 	add_child(timer)
 	
