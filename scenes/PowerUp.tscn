@@ -25,6 +25,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "blink"
+length = 2.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("WorldEnvironment:environment:glow_intensity")
@@ -36,7 +37,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.8, 0.21 ]
+"values": [ 0.21, 0.8 ]
 }
 
 [node name="PowerUp" type="StaticBody2D"]
@@ -49,6 +50,7 @@ modulate = Color( 2, 0.86, 0.96, 1 )
 texture = ExtResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PoolVector2Array( 30, -25.6, 30, -11, 21, -2.2, 21, -1.5, 23.2, 3, 19.9, 3, -4.3, 30, -17.8, 30, -30, 17.8, -30, 5, -25, 2.8, -25, 1.2, -1.8, -22, 1.8, -22, 11, -29.9, 25, -30 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

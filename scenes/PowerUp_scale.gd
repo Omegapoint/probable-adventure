@@ -8,7 +8,7 @@ extends StaticBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$AnimationPlayer.play("blink")
+	$AnimationPlayer.play("blinkPowerUpScale")
 	pass # Replace with function body.
 
 

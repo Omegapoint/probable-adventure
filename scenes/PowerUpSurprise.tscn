@@ -25,6 +25,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "blink"
+length = 2.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("WorldEnvironment:environment:glow_intensity")
@@ -36,7 +37,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.8, 0.21 ]
+"values": [ 0.21, 0.8 ]
 }
 
 [node name="PowerUpSurprise" type="StaticBody2D"]

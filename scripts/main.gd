@@ -27,7 +27,7 @@ var powerUPScale = preload("res://scenes/PowerUp_scale.tscn")
 var powerUPSurprise = preload("res://scenes/PowerUpSurprise.tscn")
 
 #Number of players
-var nrOfPlayers = 8
+var nrOfPlayers = 1
 
 #List of all players in a match
 var playerList = []
@@ -79,7 +79,7 @@ func _ready():
 	
 	
 	powerup_interval.connect("timeout",self,"add_powerUp")
-	powerup_interval.wait_time = 1
+	powerup_interval.wait_time = 5
 	powerup_interval.one_shot = true
 	add_child(powerup_interval)
 	

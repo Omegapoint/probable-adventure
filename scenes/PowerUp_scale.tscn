@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://art/powerup/yellowsnack.png" type="Texture" id=1]
 [ext_resource path="res://scenes/PowerUp_scale.gd" type="Script" id=2]
@@ -27,6 +27,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "blink"
+length = 2.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("WorldEnvironment:environment:glow_intensity")
@@ -38,7 +39,24 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.8, 0.21 ]
+"values": [ 0.21, 0.8 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "blinkPowerUpScale"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WorldEnvironment:environment:glow_intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.21, 0.8 ]
 }
 
 [node name="PowerUp_scale" type="StaticBody2D"]
@@ -62,3 +80,4 @@ polygon = PoolVector2Array( 30, -25.6, 30, -11, 21, -2.2, 21, -1.5, 23.2, 3, 19.
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
 anims/blink = SubResource( 3 )
+anims/blinkPowerUpScale = SubResource( 4 )
