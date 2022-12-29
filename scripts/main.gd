@@ -84,8 +84,8 @@ func _ready():
 	add_child(powerup_interval)
 	
 	#Start timers
-	timer.start()
 	yield(get_tree().create_timer(1), "timeout")
+	timer.start()
 	pre_timer.start()
 	timer.paused = true
 	#Play sound

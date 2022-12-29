@@ -206,12 +206,14 @@ func _process(delta):
 					if(probability < 0.5):
 						$PowerUpLabel.add_color_override("font_color", Color(1,1,0))
 						$PowerUpLabel.text = "+1"
+						$SuccessSound.play()
 						var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
 						get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal + 1)
 						get_tree().get_root().get_node("Main/Ball").counter_right= curr_goal + 1
 					else:
 						$PowerUpLabel.add_color_override("font_color", Color(1,0,0))
 						$PowerUpLabel.text = "-1"
+						$FailSound.play()
 						var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
 						get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal - 1)
 						get_tree().get_root().get_node("Main/Ball").counter_right= curr_goal - 1
