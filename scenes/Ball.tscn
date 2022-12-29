@@ -15,6 +15,7 @@ animations = [ {
 radius = 40.0
 
 [node name="Ball" type="RigidBody2D"]
+z_index = 1
 gravity_scale = 0.0
 script = ExtResource( 2 )
 
