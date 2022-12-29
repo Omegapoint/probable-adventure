@@ -77,9 +77,9 @@ func _ready():
 	pre_timer.one_shot = true
 	add_child(pre_timer)
 	
-	
+	#setup powerup timer
 	powerup_interval.connect("timeout",self,"add_powerUp")
-	powerup_interval.wait_time = 5
+	powerup_interval.wait_time = 10
 	powerup_interval.one_shot = true
 	add_child(powerup_interval)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://art/powerup/questionmark.png" type="Texture" id=1]
 [ext_resource path="res://scenes/PowerUpSurprise.gd" type="Script" id=2]
@@ -40,6 +40,23 @@ tracks/0/keys = {
 "values": [ 0.21, 0.8 ]
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "blinkPowerUpSurprise"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WorldEnvironment:environment:glow_intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.21, 0.8 ]
+}
+
 [node name="PowerUpSurprise" type="StaticBody2D"]
 scale = Vector2( 0.7, 0.7 )
 collision_layer = 2
@@ -60,3 +77,4 @@ environment = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/blink = SubResource( 2 )
+anims/blinkPowerUpSurprise = SubResource( 4 )
