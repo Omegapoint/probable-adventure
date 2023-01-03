@@ -69,7 +69,7 @@ func _ready():
 	
 	#Setup main timer
 	timer.connect("timeout",self,"end")
-	timer.wait_time = 180
+	timer.wait_time = 20
 	timer.one_shot = true
 	add_child(timer)
 	
@@ -86,10 +86,10 @@ func _ready():
 	add_child(powerup_interval)
 	
 	#Start timers
-	yield(get_tree().create_timer(1), "timeout")
 	timer.start()
-	pre_timer.start()
 	timer.paused = true
+	yield(get_tree().create_timer(1), "timeout")
+	pre_timer.start()
 	#Play sound
 	$Countdown.play()
 	
@@ -173,9 +173,10 @@ func end():
 	$TeamWonNode/RedButton.visible = true
 	$TeamWonNode/TeamWon.visible = true
 	
-	#Stops the ball and player
+	#Stops the ball, player and powerups
 	$Ball.linear_velocity = Vector2(0,0)
 	stopped = true
+	powerup_interval.stop()
 
 	#Game is over and play some applause
 	game_over = true
