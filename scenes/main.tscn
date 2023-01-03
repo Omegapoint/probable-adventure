@@ -201,7 +201,6 @@ texture = ExtResource( 8 )
 
 [node name="Countdown" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -80.0
 
 [node name="Trophy" type="Sprite" parent="."]
 visible = false
@@ -283,6 +282,7 @@ visible = false
 
 [node name="Play_off" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
+volume_db = -80.0
 
 [connection signal="child_entered_tree" from="." to="." method="_on_Main_child_entered_tree"]
 [connection signal="goal" from="Ball" to="." method="_on_Ball_goal"]

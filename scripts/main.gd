@@ -27,7 +27,7 @@ var powerUPScale = preload("res://scenes/PowerUp_scale.tscn")
 var powerUPSurprise = preload("res://scenes/PowerUpSurprise.tscn")
 
 #Number of players
-var nrOfPlayers = 1
+var nrOfPlayers = 8
 
 #List of all players in a match
 var playerList = []
@@ -36,6 +36,8 @@ var playerList = []
 var powerUpListSpeed = []
 var powerUpListScale = []
 var powerUpListSurprise = []
+var bigPlayers = 100
+
 
 #List of all players in a match
 
@@ -67,7 +69,7 @@ func _ready():
 	
 	#Setup main timer
 	timer.connect("timeout",self,"end")
-	timer.wait_time = 50
+	timer.wait_time = 180
 	timer.one_shot = true
 	add_child(timer)
 	
@@ -79,7 +81,7 @@ func _ready():
 	
 	#setup powerup timer
 	powerup_interval.connect("timeout",self,"add_powerUp")
-	powerup_interval.wait_time = 10
+	powerup_interval.wait_time = 12
 	powerup_interval.one_shot = true
 	add_child(powerup_interval)
 	
@@ -227,13 +229,13 @@ func add_powerUp():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var probability = rng.randf_range(0.0,1.0) 
-	if probability < 0.4:
+	if probability < 0.45:
 		var speedInstance = powerUPSpeed.instance()
 		speedInstance.position.x = rng.randf_range(100, 1820)
 		speedInstance.position.y = rng.randf_range(100, 980)
 		add_child(speedInstance)
 		powerUpListSpeed.append(speedInstance.name)
-	elif(probability < 0.8):
+	elif(probability < 0.9):
 		var scaleInstance = powerUPScale.instance()
 		scaleInstance.position.x = rng.randf_range(100, 1820)
 		scaleInstance.position.y = rng.randf_range(100, 980)
@@ -245,5 +247,4 @@ func add_powerUp():
 		surpriseInstance.position.y = rng.randf_range(100, 980)
 		add_child(surpriseInstance)
 		powerUpListSurprise.append(surpriseInstance.name)
-		print("hej")
 	powerup_interval.start()
