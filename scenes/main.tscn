@@ -111,7 +111,7 @@ text = "0"
 align = 1
 
 [node name="Ball" parent="." instance=ExtResource( 7 )]
-position = Vector2( 72, 632 )
+position = Vector2( 960, 540 )
 physics_material_override = SubResource( 1 )
 
 [node name="GoalYay" type="AudioStreamPlayer" parent="Ball"]
@@ -135,7 +135,7 @@ position = Vector2( -72, 888 )
 shape = SubResource( 3 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls"]
-position = Vector2( -222.5, 539.5 )
+position = Vector2( -222, 536 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls"]
@@ -282,7 +282,6 @@ visible = false
 
 [node name="Play_off" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
-volume_db = -80.0
 
 [connection signal="child_entered_tree" from="." to="." method="_on_Main_child_entered_tree"]
 [connection signal="goal" from="Ball" to="." method="_on_Ball_goal"]
