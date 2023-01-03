@@ -69,7 +69,7 @@ func _ready():
 	
 	#Setup main timer
 	timer.connect("timeout",self,"end")
-	timer.wait_time = 20
+	timer.wait_time = 180
 	timer.one_shot = true
 	add_child(timer)
 	
@@ -81,7 +81,7 @@ func _ready():
 	
 	#setup powerup timer
 	powerup_interval.connect("timeout",self,"add_powerUp")
-	powerup_interval.wait_time = 12
+	powerup_interval.wait_time = 8
 	powerup_interval.one_shot = true
 	add_child(powerup_interval)
 	

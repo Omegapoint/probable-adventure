@@ -129,7 +129,7 @@ func _process(delta):
 	if Input.is_action_pressed(moveLeft):
 		rotation -= 0.05
 	
-	# Handles the dash, sets the speed of a dash and  how long it lasts
+	# Handles the dash, sets the speed of a dash and how long it lasts
 	if(not get_tree().get_root().get_node("Main").stopped):
 		if !speedDashCooldown:
 			if Input.is_action_pressed(moveUp):
