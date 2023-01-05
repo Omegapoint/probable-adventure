@@ -200,9 +200,14 @@ func _physics_process(delta):
 	# Handles cooldown of the speed dash
 	if speedDashCooldown:
 		if speedDashCooldownTimer > 0:
+			#$ProgressBar."custom_styles/fg" = Color(1,1,1)
+			#$ProgressBar.get("custom_styles/fg").set_bg_color(Color(1,1,1))
 			$ProgressBar.value += 1
 			speedDashCooldownTimer -= 1
 		else:
+			#$ProgressBar.get("custom_styles/fg").set_bg_color(Color(52,255,0))
+			#$ProgressBar.custom_styles/fg = Color(52,255,0)
+			#("custom_styles/fg").set_bg_color(Color(52,255,0))
 			speedDashCooldown = false
 			speedDashCooldownTimer = 200
 	
