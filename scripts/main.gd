@@ -28,6 +28,8 @@ var powerUPScale = preload("res://scenes/PowerUp_scale.tscn")
 
 var powerUPSurprise = preload("res://scenes/PowerUpSurprise.tscn")
 
+var ball = preload("res://scenes/Ball.tscn")
+
 #Number of players
 var nrOfPlayers = 8
 
@@ -40,7 +42,10 @@ var powerUpListScale = []
 var powerUpListSurprise = []
 var bigPlayers = 100
 
-
+var ballList = []
+var goal = false
+var newBall = false
+var newBallPos = Vector2(0,0)
 #List of all players in a match
 
 #Starting positions for 8 players 
@@ -61,6 +66,10 @@ var playerCoordinateList = [
 
 #Called when the node enters the scene tree for the first time.
 func _ready():
+	var ballInstance = ball.instance()
+	ballInstance.position = Vector2(1920/2,1080/2)
+	add_child(ballInstance)
+	ballList = [ballInstance]
 	#Transition from black screen into game
 	$TransitionScreen.visible = true
 	
@@ -114,6 +123,9 @@ func create_player(id,x,y):
 
 #main loop
 func _process(_delta):
+	if(goal):
+		_on_Ball_goal()
+		goal = false
 	
 	#Shows the countdown for every kick off
 	if pre_timer.time_left > 2:
@@ -145,6 +157,12 @@ func _process(_delta):
 		get_node("timer_board1").text = "Time left: " + String(round(timer.time_left)) + " sec"
 		get_node("timer_board2").text = "Time left: " + String(round(timer.time_left)) + " sec"
 		
+	if(newBall):
+		var ball_instance = ball.instance()
+		ball_instance.position = newBallPos
+		add_child(ball_instance)
+		ballList.append( ball_instance)
+		newBall = false 
 	#Plays the ending sound
 	if floor(timer.time_left) == 3 :
 		$End_Countdown.play()	
@@ -196,8 +214,17 @@ func kickoff():
 func _on_Ball_goal():
 	
 	var music_position
+	$GoalYay.play()
 	
 	resetPositions = true
+	
+	for x in ballList:
+		remove_child(x)
+	ballList = []
+	var ball_instance = ball.instance()
+	ball_instance.position = Vector2(1920/2,1080/2)
+	add_child(ball_instance)
+	ballList = [ball_instance]
 	
 	#Stops the final countdown timer
 	if floor(timer.time_left) <= 3 :
@@ -235,13 +262,13 @@ func add_powerUp():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var probability = rng.randf_range(0.0,1.0) 
-	if probability < 0.45:
+	if probability < 0.4:
 		var speedInstance = powerUPSpeed.instance()
 		speedInstance.position.x = rng.randf_range(100, 1820)
 		speedInstance.position.y = rng.randf_range(100, 980)
 		add_child(speedInstance)
 		powerUpListSpeed.append(speedInstance.name)
-	elif(probability < 0.9):
+	elif(probability < 0.8):
 		var scaleInstance = powerUPScale.instance()
 		scaleInstance.position.x = rng.randf_range(100, 1820)
 		scaleInstance.position.y = rng.randf_range(100, 980)

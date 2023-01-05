@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://sound/yay-6120.mp3" type="AudioStream" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://sound/applause.mp3" type="AudioStream" id=4]
 [ext_resource path="res://sound/end-countdown.mp3" type="AudioStream" id=5]
 [ext_resource path="res://art/Playing_field/one.png" type="Texture" id=6]
-[ext_resource path="res://scenes/Ball.tscn" type="PackedScene" id=7]
 [ext_resource path="res://art/Playing_field/three.png" type="Texture" id=8]
 [ext_resource path="res://art/Playing_field/trophy.png" type="Texture" id=9]
 [ext_resource path="res://art/Playing_field/goal_left.png" type="Texture" id=10]
@@ -31,12 +30,8 @@ outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 17 )
 
-[sub_resource type="PhysicsMaterial" id=1]
-friction = 0.9
-bounce = 0.7
-
 [sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 28.25, 13 )
+extents = Vector2( 192.125, 13 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 424.75, 193 )
@@ -117,13 +112,6 @@ custom_fonts/font = SubResource( 6 )
 text = "0"
 align = 1
 
-[node name="Ball" parent="." instance=ExtResource( 7 )]
-position = Vector2( 963, 538 )
-physics_material_override = SubResource( 1 )
-
-[node name="GoalYay" type="AudioStreamPlayer" parent="Ball"]
-stream = ExtResource( 2 )
-
 [node name="One" type="Sprite" parent="."]
 visible = false
 position = Vector2( 960, 536 )
@@ -134,7 +122,7 @@ texture = ExtResource( 6 )
 [node name="Walls" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D15" type="CollisionShape2D" parent="Walls"]
-position = Vector2( 1948.75, 362 )
+position = Vector2( 2060, 379 )
 shape = SubResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
@@ -186,7 +174,7 @@ position = Vector2( 1920, 1072 )
 shape = SubResource( 7 )
 
 [node name="2" type="CollisionShape2D" parent="Walls"]
-position = Vector2( 14, 371 )
+position = Vector2( -141, 369 )
 shape = SubResource( 14 )
 
 [node name="CollisionShape2D13" type="CollisionShape2D" parent="Walls"]
@@ -194,15 +182,15 @@ position = Vector2( 1920, 0 )
 shape = SubResource( 7 )
 
 [node name="1" type="CollisionShape2D" parent="Walls"]
-position = Vector2( 17, 693 )
+position = Vector2( -142, 692 )
 shape = SubResource( 14 )
 
 [node name="3" type="CollisionShape2D" parent="Walls"]
-position = Vector2( 1900, 362 )
+position = Vector2( 2179, 153 )
 shape = SubResource( 14 )
 
 [node name="4" type="CollisionShape2D" parent="Walls"]
-position = Vector2( 1899, 696 )
+position = Vector2( 2062.88, 696 )
 shape = SubResource( 14 )
 
 [node name="Two" type="Sprite" parent="."]
@@ -310,6 +298,8 @@ visible = false
 [node name="Play_off" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
 
+[node name="GoalYay" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
 [connection signal="child_entered_tree" from="." to="." method="_on_Main_child_entered_tree"]
-[connection signal="goal" from="Ball" to="." method="_on_Ball_goal"]
 [connection signal="transitioned" from="TransitionScreen" to="." method="_on_TransitionScreen_transitioned"]

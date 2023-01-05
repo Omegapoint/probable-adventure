@@ -239,38 +239,49 @@ func _physics_process(delta):
 				var pathName = "Main/" + collide[0].name
 				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
 				get_tree().get_root().get_node("Main").powerUpListSurprise.erase(collide[0].name)
-				$PowerUpLabel.visible = true
 				var rng = RandomNumberGenerator.new()
 				rng.randomize()
 				var probability = rng.randf_range(0.0,1.0) 
 				if(id in [4,5,6,7]):
-					if(probability < 0.5):
+					if(probability < 0.33):
+						$PowerUpLabel.visible = true
 						$PowerUpLabel.add_color_override("font_color", Color(1,1,0))
 						$PowerUpLabel.text = "+1"
 						var curr_goal = int(get_tree().get_root().get_node("Main/score_leftTeam").text) 
 						get_tree().get_root().get_node("Main/score_leftTeam").text = String(curr_goal + 1)
 						get_tree().get_root().get_node("Main/Ball").counter_left= curr_goal + 1
-					else:
+					elif(probability < 0.66):
+						$PowerUpLabel.visible = true
 						$PowerUpLabel.add_color_override("font_color", Color(1,0,0))
 						$PowerUpLabel.text = "-1"
 						var curr_goal = int(get_tree().get_root().get_node("Main/score_leftTeam").text) 
 						get_tree().get_root().get_node("Main/score_leftTeam").text = String(curr_goal - 1)
 						get_tree().get_root().get_node("Main/Ball").counter_left= curr_goal - 1
+					else:
+						$SoccerKick.play()
+						get_tree().get_root().get_node("Main").newBall = true
+						get_tree().get_root().get_node("Main").newBallPos = position
 				else:
-					if(probability < 0.5):
+					if(probability < 0.33):
+						$PowerUpLabel.visible = true
 						$PowerUpLabel.add_color_override("font_color", Color(1,1,0))
 						$PowerUpLabel.text = "+1"
 						$SuccessSound.play()
 						var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
 						get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal + 1)
 						get_tree().get_root().get_node("Main/Ball").counter_right= curr_goal + 1
-					else:
+					elif(probability < 0.66):
+						$PowerUpLabel.visible = true
 						$PowerUpLabel.add_color_override("font_color", Color(1,0,0))
 						$PowerUpLabel.text = "-1"
 						$FailSound.play()
 						var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
 						get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal - 1)
 						get_tree().get_root().get_node("Main/Ball").counter_right= curr_goal - 1
+					else:
+						$SoccerKick.play()
+						get_tree().get_root().get_node("Main").newBall = true
+						get_tree().get_root().get_node("Main").newBallPos = position
 				yield(get_tree().create_timer(2), "timeout")
 				$PowerUpLabel.visible = false
 
