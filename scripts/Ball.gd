@@ -11,7 +11,7 @@ var counter_right = 0
 func _integrate_forces(state):
 	
 	#Decide if there was a goal for right team 
-	if position.x < 0 :#and (position.y > 400 and position.y < 750):
+	if position.x < 0 and (position.y > 400 and position.y < 750):
 		$GoalYay.play()
 		state.transform = Transform2D(0, Vector2(1920/2,1080/2))
 		state.linear_velocity = Vector2()
@@ -20,7 +20,7 @@ func _integrate_forces(state):
 		emit_signal("goal")
 	
 	#Decide if there was a goal for left team 
-	if position.x > 1920 :#and (position.y > 400 and position.y < 750):
+	if position.x > 1920 and (position.y > 400 and position.y < 750):
 		$GoalYay.play()
 		state.transform = Transform2D(0, Vector2(1920/2,1080/2))
 		state.linear_velocity = Vector2()

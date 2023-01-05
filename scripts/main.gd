@@ -3,6 +3,8 @@ extends Node2D
 #Player movement state
 export var stopped = true
 
+var resetPositions = false
+
 #Game over state
 var game_over = false
 
@@ -192,8 +194,10 @@ func kickoff():
 
 #Function called when there is a goal
 func _on_Ball_goal():
-		
+	
 	var music_position
+	
+	resetPositions = true
 	
 	#Stops the final countdown timer
 	if floor(timer.time_left) <= 3 :
@@ -213,6 +217,7 @@ func _on_Ball_goal():
 	
 	#Plays the kick off sound
 	yield(get_tree().create_timer(3), "timeout")
+	resetPositions = false
 	$Play_off.play()
 	
 	#Resumes the final countdown timer

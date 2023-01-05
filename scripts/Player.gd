@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends RigidBody2D
 
 var id = 1 # Just to have a default for running this script solo
 export var speed = 100 # How fast the player will move (pixels/sec).
@@ -7,7 +7,7 @@ export var stopped = true
 #PowerUp timer
 var powerUp_timer = Timer.new()
 var powerUp_timerScale = Timer.new()
-
+var dashWeight= Timer.new()
 # For specific characters
 var moveRight
 var moveLeft
@@ -26,11 +26,17 @@ var speedDashTime = 0
 
 var indexMapping = ["100","", "4", "7", "10", "13", "16", "19", "22"]
 
-
+var myRotation = 0
+var speedy = false
+var myScale = 1
+var restart = false
+var speedTest = false
 # Called when the node enters the scene tree for the first time.
 # Here we can set unique stats for different characters
 # Hardcoded for now, max 8 players though so maybe this logic is fine?
 func _ready():
+	set_contact_monitor(true)
+	set_max_contacts_reported(1000)
 	
 	#setup playoff timer
 	powerUp_timer.connect("timeout",self,"end_powerup")
@@ -42,6 +48,11 @@ func _ready():
 	powerUp_timerScale.wait_time = 7
 	powerUp_timerScale.one_shot = true
 	add_child(powerUp_timerScale)
+	
+	dashWeight.connect("timeout",self,"end_dashWeight")
+	dashWeight.wait_time = 1
+	dashWeight.one_shot = true
+	add_child(dashWeight)
 	
 	print("Player " + str(id) + " is ready!")
 	
@@ -80,7 +91,7 @@ func _ready():
 		characterSprite = "bee"
 		currentSprite =  characterSprite
 		characterSpeed = 200
-		rotation += PI
+		myRotation += PI
 		
 	elif (id == 6):
 		moveRight = "moveRight_3"
@@ -89,7 +100,7 @@ func _ready():
 		characterSprite = "butterfly"
 		currentSprite = characterSprite
 		characterSpeed= 200
-		rotation += PI
+		myRotation += PI
 		
 	elif (id == 7):
 		moveRight = "moveRight_6"
@@ -98,7 +109,7 @@ func _ready():
 		characterSprite = "ladybug"
 		currentSprite = characterSprite
 		characterSpeed = 200
-		rotation += PI
+		myRotation += PI
 		
 	elif (id == 8):
 		moveRight = "moveRight_9"
@@ -107,12 +118,34 @@ func _ready():
 		characterSprite = "bat"
 		currentSprite = characterSprite
 		characterSpeed = 200
-		rotation += PI
+		myRotation += PI
 	
+func _integrate_forces(state):
+	if(get_tree().get_root().get_node("Main").stopped):
+		linear_velocity.x = 0
+		linear_velocity.y = 0
+		var coordinate = get_tree().get_root().get_node("Main").playerCoordinateList[id-1]
+		state.transform = Transform2D(0, Vector2(coordinate[0], coordinate[1]))
+	elif(speedTest):
+		print("testingingin")
+		apply_central_impulse(Vector2(500*cos(myRotation), 500*sin(myRotation)))
+		weight += 100
+		dashWeight.start()
+		#add_central_force(Vector2(200*cos(myRotation), 200*sin(myRotation)))
+		speedTest = false
+	else:
+		if(get_tree().get_root().get_node("Main").resetPositions):
+			var coordinate = get_tree().get_root().get_node("Main").playerCoordinateList[id-1]
+			state.transform = Transform2D(0, Vector2(coordinate[0], coordinate[1]))
+		linear_velocity.x = cos(myRotation) *characterSpeed
+		linear_velocity.y = sin(myRotation) *characterSpeed
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
+	scale.x = myScale
+	scale.y = myScale
 	speed = characterSpeed
 	$AnimatedSprite.animation = currentSprite
 	
@@ -124,10 +157,18 @@ func _process(delta):
 		
 	# Player controls 	
 	if Input.is_action_pressed(moveRight):
-		rotation += 0.05
+		if(speedy):
+			myRotation += 0.075
+		else:
+			myRotation += 0.05
 
 	if Input.is_action_pressed(moveLeft):
-		rotation -= 0.05
+		if(speedy):
+			myRotation -= 0.075
+		else:
+			myRotation -= 0.05
+		
+	rotation = myRotation
 	
 	# Handles the dash, sets the speed of a dash and how long it lasts
 	if(not get_tree().get_root().get_node("Main").stopped):
@@ -137,7 +178,11 @@ func _process(delta):
 				$FireUp.play()
 				$Fire.visible = true
 				$ProgressBar.value = 0
-				speed = 2000
+				#speedTest = true
+				apply_central_impulse(Vector2(150*weight*cos(myRotation), 150*weight*sin(myRotation)))
+				weight += 100
+				dashWeight.start()
+				#characterSpeed = 2000
 				speedDashTime += 1
 				
 				if speedDashTime >= 10:
@@ -167,32 +212,33 @@ func _process(delta):
 		$AnimatedSprite.play()
 	else:
 		$AnimatedSprite.stop()
-	
-	if(not get_tree().get_root().get_node("Main").stopped):
-		# Handles movement and bounce 
-		var collide = move_and_collide(velocity * delta)
+	if(not get_tree().get_root().get_node("Main").stopped):	
+		var collide = get_colliding_bodies()
+		if(not collide == []):
 
-		if collide:
-			if collide.collider.name in get_tree().get_root().get_node("Main").powerUpListSpeed:
+			if collide[0].name in get_tree().get_root().get_node("Main").powerUpListSpeed:
+				restart = true
 				$SnackSound.play()
-				var pathName = "Main/" + collide.collider.name
+				var pathName = "Main/" + collide[0].name
 				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
-				get_tree().get_root().get_node("Main").powerUpListSpeed.erase(collide.collider.name)
+				get_tree().get_root().get_node("Main").powerUpListSpeed.erase(collide[0].name)
 				characterSpeed += 300
+				weight = 100
+				speedy = true
 				powerUp_timer.start()
-			elif collide.collider.name in get_tree().get_root().get_node("Main").powerUpListScale:
+			elif collide[0].name in get_tree().get_root().get_node("Main").powerUpListScale:
 				$SnackSound.play()
-				var pathName = "Main/" + collide.collider.name
+				var pathName = "Main/" + collide[0].name
 				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
-				get_tree().get_root().get_node("Main").powerUpListScale.erase(collide.collider.name)
-				scale.x = 2
-				scale.y = 2
+				get_tree().get_root().get_node("Main").powerUpListScale.erase(collide[0].name)
+				myScale= 2
+				weight = 100
 				get_tree().get_root().get_node("Main").bigPlayers = id
 				powerUp_timerScale.start()
-			elif collide.collider.name in get_tree().get_root().get_node("Main").powerUpListSurprise:
-				var pathName = "Main/" + collide.collider.name
+			elif collide[0].name in get_tree().get_root().get_node("Main").powerUpListSurprise:
+				var pathName = "Main/" + collide[0].name
 				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
-				get_tree().get_root().get_node("Main").powerUpListSurprise.erase(collide.collider.name)
+				get_tree().get_root().get_node("Main").powerUpListSurprise.erase(collide[0].name)
 				$PowerUpLabel.visible = true
 				var rng = RandomNumberGenerator.new()
 				rng.randomize()
@@ -227,35 +273,19 @@ func _process(delta):
 						get_tree().get_root().get_node("Main/Ball").counter_right= curr_goal - 1
 				yield(get_tree().create_timer(2), "timeout")
 				$PowerUpLabel.visible = false
-			elif not collide.collider.name == "Walls":
-				var s = collide.collider.name
-				s.erase(0,8)
-				var bigId = (get_tree().get_root().get_node("Main").bigPlayers)
-				var collideId = indexMapping.find(s,0)
-				#Collided with a big player 
-				if((bigId) == (collideId)):
-					velocity.x = (velocity.x)* (-100)
-					velocity.y = (velocity.y )* (-100)
-					rotation = (rotation) + (PI)
-				elif(not bigId == id):
-					var rng = RandomNumberGenerator.new()
-					rng.randomize()
-					var probability = rng.randf_range(0.0,1.0)
-					if( probability > 0.5):	 
-						rotation = (rotation) + (PI/6)
-					else:
-						rotation = (rotation) - (PI/6)
-				else: 
-					return
-			else:
-				velocity.x = velocity.x * (-1)
-				velocity.y = velocity.y * (-1)
-				rotation = (rotation) + (PI/4)
 
 func end_powerup():
+	weight = 10
 	characterSpeed -= 300
+	speedy = false
+	
+func end_dashWeight():
+	print("hejehje")
+	weight -= 100
+
 	
 func end_powerupScale():
-	scale.x = 1
-	scale.y = 1
+	print("jasmine")
+	myScale = 1
+	weight = 10
 	get_tree().get_root().get_node("Main").bigPlayers = 100
