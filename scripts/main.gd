@@ -46,7 +46,10 @@ var ballList = []
 var goal = false
 var newBall = false
 var newBallPos = Vector2(0,0)
-#List of all players in a match
+
+
+var counterLeft = 0
+var counterRight = 0
 
 #Starting positions for 8 players 
 var playerCoordinateList = [
@@ -123,9 +126,11 @@ func create_player(id,x,y):
 
 #main loop
 func _process(_delta):
+	if Input.is_action_pressed("start_game"):
+		return get_tree().change_scene("res://scenes/Menu.tscn")
 	if(goal):
-		_on_Ball_goal()
 		goal = false
+		_on_Ball_goal()
 	
 	#Shows the countdown for every kick off
 	if pre_timer.time_left > 2:

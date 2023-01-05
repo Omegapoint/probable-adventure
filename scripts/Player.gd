@@ -30,7 +30,7 @@ var myRotation = 0
 var speedy = false
 var myScale = 1
 var restart = false
-var speedTest = false
+var isDash = false
 # Called when the node enters the scene tree for the first time.
 # Here we can set unique stats for different characters
 # Hardcoded for now, max 8 players though so maybe this logic is fine?
@@ -126,13 +126,11 @@ func _integrate_forces(state):
 		linear_velocity.y = 0
 		var coordinate = get_tree().get_root().get_node("Main").playerCoordinateList[id-1]
 		state.transform = Transform2D(0, Vector2(coordinate[0], coordinate[1]))
-	elif(speedTest):
-		print("testingingin")
+	elif(isDash):
 		apply_central_impulse(Vector2(500*cos(myRotation), 500*sin(myRotation)))
 		weight += 100
 		dashWeight.start()
-		#add_central_force(Vector2(200*cos(myRotation), 200*sin(myRotation)))
-		speedTest = false
+		isDash = false
 	else:
 		if(get_tree().get_root().get_node("Main").resetPositions):
 			var coordinate = get_tree().get_root().get_node("Main").playerCoordinateList[id-1]
@@ -178,11 +176,9 @@ func _physics_process(delta):
 				$FireUp.play()
 				$Fire.visible = true
 				$ProgressBar.value = 0
-				#speedTest = true
 				apply_central_impulse(Vector2(150*weight*cos(myRotation), 150*weight*sin(myRotation)))
 				weight += 100
 				dashWeight.start()
-				#characterSpeed = 2000
 				speedDashTime += 1
 				
 				if speedDashTime >= 10:
@@ -194,20 +190,14 @@ func _physics_process(delta):
 			if(Input.is_action_just_released(moveUp)):
 				speedDashCooldown = true 
 				speedDashTime = 0
-				#currentSprite = characterSprite
 				$Fire.visible = false
 				
 	# Handles cooldown of the speed dash
 	if speedDashCooldown:
 		if speedDashCooldownTimer > 0:
-			#$ProgressBar."custom_styles/fg" = Color(1,1,1)
-			#$ProgressBar.get("custom_styles/fg").set_bg_color(Color(1,1,1))
 			$ProgressBar.value += 1
 			speedDashCooldownTimer -= 1
 		else:
-			#$ProgressBar.get("custom_styles/fg").set_bg_color(Color(52,255,0))
-			#$ProgressBar.custom_styles/fg = Color(52,255,0)
-			#("custom_styles/fg").set_bg_color(Color(52,255,0))
 			speedDashCooldown = false
 			speedDashCooldownTimer = 200
 	
@@ -254,14 +244,14 @@ func _physics_process(delta):
 						$PowerUpLabel.text = "+1"
 						var curr_goal = int(get_tree().get_root().get_node("Main/score_leftTeam").text) 
 						get_tree().get_root().get_node("Main/score_leftTeam").text = String(curr_goal + 1)
-						get_tree().get_root().get_node("Main/Ball").counter_left= curr_goal + 1
+						get_tree().get_root().get_node("Main").counterLeft= curr_goal + 1
 					elif(probability < 0.66):
 						$PowerUpLabel.visible = true
 						$PowerUpLabel.add_color_override("font_color", Color(1,0,0))
 						$PowerUpLabel.text = "-1"
 						var curr_goal = int(get_tree().get_root().get_node("Main/score_leftTeam").text) 
 						get_tree().get_root().get_node("Main/score_leftTeam").text = String(curr_goal - 1)
-						get_tree().get_root().get_node("Main/Ball").counter_left= curr_goal - 1
+						get_tree().get_root().get_node("Main").counterLeft= curr_goal - 1
 					else:
 						$SoccerKick.play()
 						get_tree().get_root().get_node("Main").newBall = true
@@ -274,7 +264,7 @@ func _physics_process(delta):
 						$SuccessSound.play()
 						var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
 						get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal + 1)
-						get_tree().get_root().get_node("Main/Ball").counter_right= curr_goal + 1
+						get_tree().get_root().get_node("Main").counterRight= curr_goal + 1
 					elif(probability < 0.66):
 						$PowerUpLabel.visible = true
 						$PowerUpLabel.add_color_override("font_color", Color(1,0,0))
@@ -282,7 +272,7 @@ func _physics_process(delta):
 						$FailSound.play()
 						var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
 						get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal - 1)
-						get_tree().get_root().get_node("Main/Ball").counter_right= curr_goal - 1
+						get_tree().get_root().get_node("Main").counterRight= curr_goal - 1
 					else:
 						$SoccerKick.play()
 						get_tree().get_root().get_node("Main").newBall = true
