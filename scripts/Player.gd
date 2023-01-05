@@ -222,7 +222,7 @@ func _physics_process(delta):
 				var pathName = "Main/" + collide[0].name
 				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
 				get_tree().get_root().get_node("Main").powerUpListSpeed.erase(collide[0].name)
-				characterSpeed += 300
+				characterSpeed = 500
 				weight = 100
 				speedy = true
 				powerUp_timer.start()
@@ -287,7 +287,7 @@ func _physics_process(delta):
 
 func end_powerup():
 	weight = 10
-	characterSpeed -= 300
+	characterSpeed = 200
 	speedy = false
 	
 func end_dashWeight():

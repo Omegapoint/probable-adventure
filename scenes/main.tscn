@@ -31,7 +31,7 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 17 )
 
 [sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 192.125, 13 )
+extents = Vector2( 192.125, 22 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 424.75, 193 )
@@ -122,7 +122,7 @@ texture = ExtResource( 6 )
 [node name="Walls" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D15" type="CollisionShape2D" parent="Walls"]
-position = Vector2( 2060, 379 )
+position = Vector2( 2062, 373 )
 shape = SubResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
@@ -146,7 +146,7 @@ position = Vector2( 952, 1628 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Walls"]
-position = Vector2( 2340, 194 )
+position = Vector2( 2344, 194 )
 shape = SubResource( 3 )
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="Walls"]
@@ -174,7 +174,7 @@ position = Vector2( 1920, 1072 )
 shape = SubResource( 7 )
 
 [node name="2" type="CollisionShape2D" parent="Walls"]
-position = Vector2( -141, 369 )
+position = Vector2( -138, 362 )
 shape = SubResource( 14 )
 
 [node name="CollisionShape2D13" type="CollisionShape2D" parent="Walls"]
@@ -190,7 +190,7 @@ position = Vector2( 2179, 153 )
 shape = SubResource( 14 )
 
 [node name="4" type="CollisionShape2D" parent="Walls"]
-position = Vector2( 2062.88, 696 )
+position = Vector2( 2056, 690 )
 shape = SubResource( 14 )
 
 [node name="Two" type="Sprite" parent="."]

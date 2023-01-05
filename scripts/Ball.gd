@@ -11,7 +11,7 @@ var counter_right = 0
 func _integrate_forces(state):
 	
 	#Decide if there was a goal for right team 
-	if position.x < 0 and (position.y > 400 and position.y < 750):
+	if position.x < 0 and (position.y > 390 and position.y < 700):
 		state.transform = Transform2D(0, Vector2(1920/2,1080/2))
 		state.linear_velocity = Vector2()
 		counter_left = counter_left + 1
@@ -20,7 +20,7 @@ func _integrate_forces(state):
 		get_tree().get_root().get_node("Main").goal = true
 	
 	#Decide if there was a goal for left team 
-	if position.x > 1920 and (position.y > 400 and position.y < 750):
+	if position.x > 1920 and (position.y > 390 and position.y < 700):
 		state.transform = Transform2D(0, Vector2(1920/2,1080/2))
 		state.linear_velocity = Vector2()
 		counter_right = counter_right + 1
