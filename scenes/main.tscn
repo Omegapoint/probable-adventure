@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://sound/yay-6120.mp3" type="AudioStream" id=2]
@@ -29,6 +29,10 @@ size = 200
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 17 )
+
+[sub_resource type="PhysicsMaterial" id=15]
+rough = true
+bounce = 0.5
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 192.125, 22 )
@@ -120,6 +124,7 @@ z_index = 2
 texture = ExtResource( 6 )
 
 [node name="Walls" type="StaticBody2D" parent="."]
+physics_material_override = SubResource( 15 )
 
 [node name="CollisionShape2D15" type="CollisionShape2D" parent="Walls"]
 position = Vector2( 2062, 373 )
