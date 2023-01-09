@@ -122,6 +122,10 @@ func _ready():
 	
 func _integrate_forces(state):
 	if(get_tree().get_root().get_node("Main").stopped):
+		$Fire.visible = false
+		speedDashCooldown = false 
+		speedDashTime = 0
+		$ProgressBar.value = 200
 		linear_velocity.x = 0
 		linear_velocity.y = 0
 		var coordinate = get_tree().get_root().get_node("Main").playerCoordinateList[id-1]
@@ -210,75 +214,13 @@ func _physics_process(delta):
 	if(not get_tree().get_root().get_node("Main").stopped):	
 		var collide = get_colliding_bodies()
 		if(not collide == []):
-
 			if collide[0].name in get_tree().get_root().get_node("Main").powerUpListSpeed:
-				restart = true
-				$SnackSound.play()
-				var pathName = "Main/" + collide[0].name
-				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
-				get_tree().get_root().get_node("Main").powerUpListSpeed.erase(collide[0].name)
-				characterSpeed = 500
-				weight = 100
-				speedy = true
-				powerUp_timer.start()
+				start_powerup_speed(collide)
 			elif collide[0].name in get_tree().get_root().get_node("Main").powerUpListScale:
-				$SnackSound.play()
-				var pathName = "Main/" + collide[0].name
-				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
-				get_tree().get_root().get_node("Main").powerUpListScale.erase(collide[0].name)
-				myScale= 2
-				weight = 100
-				get_tree().get_root().get_node("Main").bigPlayers = id
-				powerUp_timerScale.start()
+				start_powerup_scale(collide)
 			elif collide[0].name in get_tree().get_root().get_node("Main").powerUpListSurprise:
-				var pathName = "Main/" + collide[0].name
-				get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
-				get_tree().get_root().get_node("Main").powerUpListSurprise.erase(collide[0].name)
-				var rng = RandomNumberGenerator.new()
-				rng.randomize()
-				var probability = rng.randf_range(0.0,1.0) 
-				if(id in [4,5,6,7]):
-					if(probability < 0.33):
-						$PowerUpLabel.visible = true
-						$PowerUpLabel.add_color_override("font_color", Color(1,1,0))
-						$PowerUpLabel.text = "+1"
-						var curr_goal = int(get_tree().get_root().get_node("Main/score_leftTeam").text) 
-						get_tree().get_root().get_node("Main/score_leftTeam").text = String(curr_goal + 1)
-						get_tree().get_root().get_node("Main").counterLeft= curr_goal + 1
-					elif(probability < 0.66):
-						$PowerUpLabel.visible = true
-						$PowerUpLabel.add_color_override("font_color", Color(1,0,0))
-						$PowerUpLabel.text = "-1"
-						var curr_goal = int(get_tree().get_root().get_node("Main/score_leftTeam").text) 
-						get_tree().get_root().get_node("Main/score_leftTeam").text = String(curr_goal - 1)
-						get_tree().get_root().get_node("Main").counterLeft= curr_goal - 1
-					else:
-						$SoccerKick.play()
-						get_tree().get_root().get_node("Main").newBall = true
-						get_tree().get_root().get_node("Main").newBallPos = position
-				else:
-					if(probability < 0.33):
-						$PowerUpLabel.visible = true
-						$PowerUpLabel.add_color_override("font_color", Color(1,1,0))
-						$PowerUpLabel.text = "+1"
-						$SuccessSound.play()
-						var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
-						get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal + 1)
-						get_tree().get_root().get_node("Main").counterRight= curr_goal + 1
-					elif(probability < 0.66):
-						$PowerUpLabel.visible = true
-						$PowerUpLabel.add_color_override("font_color", Color(1,0,0))
-						$PowerUpLabel.text = "-1"
-						$FailSound.play()
-						var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
-						get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal - 1)
-						get_tree().get_root().get_node("Main").counterRight= curr_goal - 1
-					else:
-						$SoccerKick.play()
-						get_tree().get_root().get_node("Main").newBall = true
-						get_tree().get_root().get_node("Main").newBallPos = position
-				yield(get_tree().create_timer(2), "timeout")
-				$PowerUpLabel.visible = false
+				start_powerup_surprise(collide)
+
 
 func end_powerup():
 	weight = 10
@@ -286,12 +228,80 @@ func end_powerup():
 	speedy = false
 	
 func end_dashWeight():
-	print("hejehje")
 	weight -= 100
 
 	
 func end_powerupScale():
-	print("jasmine")
 	myScale = 1
 	weight = 10
 	get_tree().get_root().get_node("Main").bigPlayers = 100
+	
+func start_powerup_speed(collide):
+	restart = true
+	$SnackSound.play()
+	var pathName = "Main/" + collide[0].name
+	get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
+	get_tree().get_root().get_node("Main").powerUpListSpeed.erase(collide[0].name)
+	characterSpeed = 500
+	weight = 100
+	speedy = true
+	powerUp_timer.start()
+	
+func start_powerup_scale(collide):
+	$SnackSound.play()
+	var pathName = "Main/" + collide[0].name
+	get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
+	get_tree().get_root().get_node("Main").powerUpListScale.erase(collide[0].name)
+	myScale= 2
+	weight = 100
+	get_tree().get_root().get_node("Main").bigPlayers = id
+	powerUp_timerScale.start()
+	
+func start_powerup_surprise(collide):
+	var pathName = "Main/" + collide[0].name
+	get_tree().get_root().get_node("Main").remove_child(get_tree().get_root().get_node(pathName))
+	get_tree().get_root().get_node("Main").powerUpListSurprise.erase(collide[0].name)
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var probability = rng.randf_range(0.0,1.0) 
+	if(id in [4,5,6,7]):
+		if(probability < 0.33):
+			$PowerUpLabel.visible = true
+			$PowerUpLabel.add_color_override("font_color", Color(1,1,0))
+			$PowerUpLabel.text = "+1"
+			var curr_goal = int(get_tree().get_root().get_node("Main/score_leftTeam").text) 
+			get_tree().get_root().get_node("Main/score_leftTeam").text = String(curr_goal + 1)
+			get_tree().get_root().get_node("Main").counterLeft= curr_goal + 1
+		elif(probability < 0.66):
+			$PowerUpLabel.visible = true
+			$PowerUpLabel.add_color_override("font_color", Color(1,0,0))
+			$PowerUpLabel.text = "-1"
+			var curr_goal = int(get_tree().get_root().get_node("Main/score_leftTeam").text) 
+			get_tree().get_root().get_node("Main/score_leftTeam").text = String(curr_goal - 1)
+			get_tree().get_root().get_node("Main").counterLeft= curr_goal - 1
+		else:
+			$SoccerKick.play()
+			get_tree().get_root().get_node("Main").add_new_ball(position)
+	else:
+		if(probability < 0.33):
+			$PowerUpLabel.visible = true
+			$PowerUpLabel.add_color_override("font_color", Color(1,1,0))
+			$PowerUpLabel.text = "+1"
+			$SuccessSound.play()
+			var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
+			get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal + 1)
+			get_tree().get_root().get_node("Main").counterRight= curr_goal + 1
+		elif(probability < 0.66):
+			$PowerUpLabel.visible = true
+			$PowerUpLabel.add_color_override("font_color", Color(1,0,0))
+			$PowerUpLabel.text = "-1"
+			$FailSound.play()
+			var curr_goal = int(get_tree().get_root().get_node("Main/score_rightTeam").text) 
+			get_tree().get_root().get_node("Main/score_rightTeam").text = String(curr_goal - 1)
+			get_tree().get_root().get_node("Main").counterRight= curr_goal - 1
+		else:
+			$SoccerKick.play()
+			get_tree().get_root().get_node("Main").add_new_ball(position)
+	yield(get_tree().create_timer(2), "timeout")
+	$PowerUpLabel.visible = false
+

@@ -41,11 +41,7 @@ var powerUpListSpeed = []
 var powerUpListScale = []
 var powerUpListSurprise = []
 var bigPlayers = 100
-
 var ballList = []
-var goal = false
-var newBall = false
-var newBallPos = Vector2(0,0)
 
 
 var counterLeft = 0
@@ -69,10 +65,12 @@ var playerCoordinateList = [
 
 #Called when the node enters the scene tree for the first time.
 func _ready():
+	#Add an initial ball to the scene 
 	var ballInstance = ball.instance()
 	ballInstance.position = Vector2(1920/2,1080/2)
 	add_child(ballInstance)
 	ballList = [ballInstance]
+	
 	#Transition from black screen into game
 	$TransitionScreen.visible = true
 	
@@ -104,6 +102,7 @@ func _ready():
 	timer.paused = true
 	yield(get_tree().create_timer(1), "timeout")
 	pre_timer.start()
+	
 	#Play sound
 	$Countdown.play()
 	
@@ -128,10 +127,7 @@ func create_player(id,x,y):
 func _process(_delta):
 	if Input.is_action_pressed("start_game"):
 		return get_tree().change_scene("res://scenes/Menu.tscn")
-	if(goal):
-		goal = false
-		_on_Ball_goal()
-	
+
 	#Shows the countdown for every kick off
 	if pre_timer.time_left > 2:
 		$"Three".visible = true
@@ -162,12 +158,7 @@ func _process(_delta):
 		get_node("timer_board1").text = "Time left: " + String(round(timer.time_left)) + " sec"
 		get_node("timer_board2").text = "Time left: " + String(round(timer.time_left)) + " sec"
 		
-	if(newBall):
-		var ball_instance = ball.instance()
-		ball_instance.position = newBallPos
-		add_child(ball_instance)
-		ballList.append( ball_instance)
-		newBall = false 
+		
 	#Plays the ending sound
 	if floor(timer.time_left) == 3 :
 		$End_Countdown.play()	
@@ -223,8 +214,11 @@ func _on_Ball_goal():
 	
 	resetPositions = true
 	
+	#Remove all balls
 	for x in ballList:
 		remove_child(x)
+	
+	#Add a new ball in the middle 
 	ballList = []
 	var ball_instance = ball.instance()
 	ball_instance.position = Vector2(1920/2,1080/2)
@@ -286,3 +280,9 @@ func add_powerUp():
 		add_child(surpriseInstance)
 		powerUpListSurprise.append(surpriseInstance.name)
 	powerup_interval.start()
+
+func add_new_ball(newBallPos):
+	var ball_instance = ball.instance()
+	ball_instance.position = newBallPos
+	add_child(ball_instance)
+	ballList.append( ball_instance)

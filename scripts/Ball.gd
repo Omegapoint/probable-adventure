@@ -12,7 +12,7 @@ func _integrate_forces(state):
 		state.linear_velocity = Vector2()
 		get_tree().get_root().get_node("Main").counterLeft += 1
 		get_tree().get_root().get_node("Main/score_leftTeam").text = String(get_tree().get_root().get_node("Main").counterLeft)
-		get_tree().get_root().get_node("Main").goal = true
+		get_tree().get_root().get_node("Main")._on_Ball_goal()
 	
 	#Decide if there was a goal for left team 
 	if position.x > 1920 and (position.y > 390 and position.y < 700):
@@ -20,5 +20,5 @@ func _integrate_forces(state):
 		state.linear_velocity = Vector2()
 		get_tree().get_root().get_node("Main").counterRight +=1
 		get_tree().get_root().get_node("Main/score_rightTeam").text = String(get_tree().get_root().get_node("Main").counterRight)
-		get_tree().get_root().get_node("Main").goal = true
+		get_tree().get_root().get_node("Main")._on_Ball_goal()
 
