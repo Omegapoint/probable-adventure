@@ -44,7 +44,7 @@ margin_right = 1920.0
 margin_bottom = 350.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "Paws on the pitch"
+text = "Zoo-per League"
 align = 1
 
 [node name="Play" type="Label" parent="Title"]
