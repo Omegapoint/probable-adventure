@@ -93,7 +93,7 @@ func _ready():
 	
 	#setup powerup timer
 	powerup_interval.connect("timeout",self,"add_powerUp")
-	powerup_interval.wait_time = 3
+	powerup_interval.wait_time = 8
 	powerup_interval.one_shot = true
 	add_child(powerup_interval)
 	
@@ -260,7 +260,7 @@ func add_powerUp():
 	
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var probability = rng.randf_range(0.0,10.0) 
+	var probability = rng.randf_range(0.0,1.0) 
 	if probability < 0.4:
 		var speedInstance = powerUPSpeed.instance()
 		speedInstance.position.x = rng.randf_range(100, 1820)
