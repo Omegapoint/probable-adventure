@@ -264,7 +264,7 @@ func start_powerup_surprise(collide):
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var probability = rng.randf_range(0.0,1.0) 
-	if(id in [4,5,6,7]):
+	if(id in [5,6,7,8]):
 		if(probability < 0.33):
 			$PowerUpLabel.visible = true
 			$PowerUpLabel.add_color_override("font_color", Color(1,1,0))
