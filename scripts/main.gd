@@ -67,7 +67,7 @@ var playerCoordinateList = [
 func _ready():
 	#Add an initial ball to the scene 
 	var ballInstance = ball.instance()
-	ballInstance.position = Vector2(1920/2,1080/2)
+	ballInstance.position =Vector2(1920/2,1080/2)
 	add_child(ballInstance)
 	ballList = [ballInstance]
 	
