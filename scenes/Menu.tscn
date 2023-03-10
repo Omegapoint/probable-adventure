@@ -98,6 +98,7 @@ valign = 2
 
 [node name="Background_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -80.0
 
 [node name="Left_paw" type="Sprite" parent="."]
 position = Vector2( 760, 492 )
